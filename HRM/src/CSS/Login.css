@@ -1,0 +1,49 @@
+#borderPaneLoginMain{
+	-fx-background-color: linear-gradient(to top, #c9d6ff, #EEEEEE);
+}
+#imageLogo{
+	
+}
+#iKonUsername{
+	-fx-fill:#6F65E7;
+}
+#txtUsername{
+	-fx-background-color: transparent;
+	-fx-border-width: 0 0 2.5 0;
+	-fx-border-color: #6F65E7;
+}
+#txtUsername:hover{
+	-fx-background-color: #E8EAF6;
+	-fx-border-width: 0 0 2.5 0;
+	-fx-border-color: #6F65E7;
+}
+#iKonPassword{
+	-fx-fill:#6F65E7;
+}
+#txtPassword{
+	-fx-background-color: transparent;
+	-fx-border-width: 0 0 2.5 0;
+	-fx-border-color: #6F65E7;
+}
+#txtPassword:hover{
+	-fx-background-color: #E8EAF6;
+	-fx-border-width: 0 0 2.5 0;
+	-fx-border-color: #6F65E7;
+}
+#checkboxRememberMe{
+	-fx-text-fill: #303F9F;
+}
+#checkboxRememberMe .box{
+	-fx-border-color: #303F9F;
+	-fx-border-width: 1.5;
+	-fx-background-color: transparent;
+	-fx-border-radius: 2;
+}
+#btnLogin{
+	-fx-background-color: #6F65E7;
+	-fx-text-fill: #FFFFFF;
+	-fx-background-radius: 5px;
+}
+#lbTitleLogin{
+	-fx-text-fill: #303F9F;
+}
