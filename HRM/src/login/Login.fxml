@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -25,17 +26,17 @@
                   <Font name="Roboto" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtPassword" layoutX="66.0" layoutY="272.0" prefHeight="30.0" prefWidth="220.0" promptText="Password">
+            <PasswordField fx:id="txtPassword" layoutX="66.0" layoutY="272.0" prefHeight="30.0" prefWidth="220.0" promptText="Password">
                <font>
-                  <Font name="Roboto" size="14.0" />
+                  <Font size="14.0" />
                </font>
-            </TextField>
-            <CheckBox fx:id="checkboxRememberMe" layoutX="66.0" layoutY="313.0" mnemonicParsing="false" text="Remember Me!" />
-            <Button fx:id="btnLogin" layoutX="143.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleLogin" text="Login">
+            </PasswordField>
+            <Button fx:id="btnLogin" defaultButton="true" layoutX="143.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleLogin" text="Login">
                <font>
                   <Font name="Roboto Bold" size="16.0" />
                </font>
             </Button>
+            <CheckBox fx:id="checkboxRememberMe" layoutX="66.0" layoutY="313.0" mnemonicParsing="false" text="Remember Me!" />
             <Label fx:id="lbTitleLogin" layoutX="62.0" layoutY="390.0" text="Wellcome to HRM &amp; Task Allocation!" textAlignment="CENTER">
                <font>
                   <Font name="Roboto" size="14.0" />

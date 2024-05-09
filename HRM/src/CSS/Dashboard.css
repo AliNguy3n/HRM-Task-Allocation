@@ -1,8 +1,9 @@
 #dashBoardPane{
-	
+	-fx-background-color: #f3f3f8;
 }
 #navDashBoardLeft{
 	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 7px;
 }
 #paneTitleNav{
 	-fx-border-width: 0 0 1 0;

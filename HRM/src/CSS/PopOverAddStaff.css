@@ -1,0 +1,12 @@
+#listSelectionViewPane{
+	
+}
+
+#popOverbtnAdd{
+	-fx-background-color: #60A5FA;
+	-fx-text-fill: #FFFFFF;
+}
+
+#popOverpane{
+	-fx-background-color: transparent;
+}

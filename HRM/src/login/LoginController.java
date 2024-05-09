@@ -11,10 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -22,9 +25,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.FontIcon;
+
+import application.Main;
+import dap.DAPLogin;
 
 public class LoginController implements Initializable{
 
@@ -59,7 +67,7 @@ public class LoginController implements Initializable{
     private TextField txtUsername;
 
     @FXML
-    void handleLogin(ActionEvent event) {
+    void handleLogin(ActionEvent event) throws SQLException {
     	if(event.getSource()==btnLogin) {
     		if(checkLogin()) {
     			try {
@@ -67,6 +75,7 @@ public class LoginController implements Initializable{
 					Scene newScene = new Scene(dashBoard);
 					Stage newStage = new Stage();
 					newStage.setTitle("HRM & Task Allocation Appliction");
+					newStage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
 					newStage.setScene(newScene);
 					newStage.show();
 					borderPaneLoginMain.getScene().getWindow().hide();
@@ -76,15 +85,47 @@ public class LoginController implements Initializable{
     		}
     	}
     }
-    private boolean checkLogin() {
-    	boolean check = true;
+    
+    private boolean checkLogin() throws SQLException {
+    	boolean check = false;
     	
+    	if(txtUsername.getText().isBlank() || txtPassword.getText().isBlank()) {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Login Message");
+    		alert.setContentText("Username or Password is Empty");
+    		alert.showAndWait();
+    	}else {
+    		DAPLogin login = new DAPLogin();
+    		ResultSet res = login.select(txtUsername.getText(), txtPassword.getText());
+    		if(res.next()) {
+    			Main.userLogin.setId(res.getInt("ID"));
+    			Main.userLogin.setFirstname(res.getString("First_Name"));
+    			Main.userLogin.setLastname(res.getString("Last_Name"));
+    			Main.userLogin.setEmail(res.getString("Email"));
+    			Main.userLogin.setUsername(res.getString("User_Name"));
+    			Main.userLogin.setStatus(res.getString("Status"));
+    			Main.userLogin.setDepartment(res.getString("Department"));
+    			Main.userLogin.setPermission(res.getString("Permission"));
+    			Main.userLogin.setPhonenumber(res.getString("Phone_Number"));
+    			Main.userLogin.setPosition(res.getString("Position"));
+    			Main.userLogin.setSalary(res.getFloat("Salary"));
+        		check = true;
+        		
+        	}else {
+        		Alert alert = new Alert(AlertType.ERROR);
+        		alert.setTitle("Login Message");
+        		alert.setContentText("Username or Password not Correct");
+        		alert.showAndWait();
+        	}
+    		login.close();
+    	}	
     	return check;
     }
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		
+		txtUsername.setText("admin");
+		txtPassword.setText("123");
 	}
     
 }

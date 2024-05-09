@@ -21,6 +21,8 @@ import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import application.Main;
+
 public class DashBoardController implements Initializable{
 
     @FXML
@@ -71,7 +73,7 @@ public class DashBoardController implements Initializable{
     @FXML
     void handleDashBoardNav(ActionEvent event) {
     	if(event.getSource()==btnHome) {
-    		displayPaneElement("/home/Home.fxml");
+    		displayPaneElement("/home/HomeManager.fxml");
     	}
     	if(event.getSource()==btnManage) {
     		displayPaneElement("/manage/Manage.fxml");
@@ -92,6 +94,11 @@ public class DashBoardController implements Initializable{
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		displayPaneElement("/home/Home.fxml");
+		switch (Main.obSettings.getValue("pageStartup")) {
+		case "Accounts" -> displayPaneElement("/accounts/Accounts.fxml");
+		case "Manage" -> displayPaneElement("/manage/Manage.fxml");
+		case "Settings" -> displayPaneElement("/settings/Settings.fxml");
+		default -> displayPaneElement("/home/HomeManager.fxml");	
+		}
 	}
 }

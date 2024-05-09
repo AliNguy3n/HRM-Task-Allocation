@@ -1,0 +1,65 @@
+#btnApplySettings{
+	-fx-background-color:#42A5F5;
+	-fx-text-fill:#FAFAFA;
+}
+#btnApplySettings:hover{
+	-fx-background-color:#1E88E5;
+	-fx-text-fill:#FAFAFA;
+}
+#checkBoxHideNotifications{
+	
+}
+#choiceBoxStartup{
+	
+}
+#gridPaneDatabase{
+	
+}
+#gridPaneGeneral{
+	-fx-border-width: 0 0 1 0;
+	-fx-border-color: #D1D5DB;
+}
+#iKonSettings{
+	-fx-fill:#6B45D9;
+}
+
+#lbServerName, #lbUsername, #lbPort, #lbPassword, #lbPageStartup, #lbHideNotifications, 
+#lbDatabaseName ,#lbDatabaseDesc{
+	-fx-text-fill:#565656;
+}
+#lbTitleDatabase{
+	-fx-text-fill:#1E88E5;
+}
+#lbTitleGeneral{
+	-fx-text-fill:#1E88E5;
+}
+#lbTitleSettings{
+	-fx-text-fill:#565656;
+}
+
+#settingPaneTop{
+	-fx-border-width: 0 0 1 0;
+	-fx-border-color: #D1D5DB;
+}
+#settingsPane{
+	-fx-background-color:#FFFFFF;
+	-fx-background-radius: 7px
+}
+#settingsPaneVBox{
+	
+}
+#txtDatabaseName{
+	
+}
+#txtPassword{
+	
+}
+#txtPort{
+	
+}
+#txtServerName{
+	
+}
+#txtUserName{
+	
+}

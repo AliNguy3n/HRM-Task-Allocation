@@ -1,0 +1,108 @@
+
+#createTaskPane{
+	-fx-background-radius: 7px;
+	-fx-background-color: #FFFFFF;
+}
+
+
+#crt_GridPane{
+	
+}
+
+
+
+#crt_IkonContents, #crt_IkonFinish, #crt_IkonFrom, #crt_IkonStart, #crt_IkonTitle{
+	-fx-fill: #565656;
+}
+#crt_IkonClearStaff{
+	-fx-fill:#BE123C;
+}
+#crt_lbTitleTo .label{
+	-fx-font-size: 14;
+	
+}
+
+#crt_PaneTop{
+	-fx-background-color: #BBF7D0;
+	-fx-background-radius: 7px 7px 0 0;
+}
+
+
+#crt_PickFinishDate , #crt_PickStartDate{
+	-fx-background-color: #e9e9e9
+	
+}
+
+#crt_PickFinishDate .arrow-button, #crt_PickStartDate .arrow-button{
+	-fx-background-color: #e8ebee;
+}
+
+#crt_PickFinishDate .text-field, #crt_PickStartDate .text-field{
+	-fx-background-color: #e8ebee;
+	
+}
+
+#crt_PickFinishTime, #crt_PickStartTime{
+	-fx-background-color: #e8ebee;
+	-fx-background-radius: 5px;
+}
+
+#crt_PickHoursStart, #crt_PickMinutesStart, #crt_PickHoursFinish, #crt_PickMinutesFinish{
+	-fx-background-color: #e8ebee;
+}
+#iKonClockStart, #iKonClockFinish{
+	-fx-fill: #565656;
+}
+
+#crt_TextArea{
+	-fx-background-color: #e9e9e9;
+	-fx-background-radius: 5px;
+}
+#crt_TextArea .content{
+	-fx-background-color: transparent
+
+}
+
+#crt_bottomPane{
+	
+}
+
+
+#crt_btnAddStaff ,#crt_btnClearStaff{
+	-fx-background-color: transparent;
+}
+#crt_btnAddStaff:hover{
+	-fx-background-color: #BBF7D0;
+	-fx-background-radius: 7px;
+}
+#crt_IkonAddStaff{
+	-fx-fill:#166534
+}
+
+
+
+#crt_btnCancel{
+	-fx-background-color: #FFC2B8;
+	-fx-text-fill:#FF4343;
+	-fx-background-radius: 5px;
+}
+
+#crt_btnCreateTask{
+	-fx-background-color: #BBF7D0;
+	-fx-text-fill:#166534;
+	-fx-background-radius: 5px;
+}
+
+
+#crt_lbContents, #crt_lbTo, #crt_lbFrom, #crt_lbStart, #crt_lbTitleFrom{
+	-fx-text-fill: #565656;
+
+}
+
+#crt_lbTopTitle{
+	-fx-text-fill: #166534;
+}
+
+#crt_txtTitle{
+	-fx-background-color: transparent;
+}

@@ -1,0 +1,148 @@
+#btnAddTask{
+	-fx-background-color: #BBF7D0;
+	-fx-background-radius: 7px;
+	-fx-text-fill: #166534;
+}
+#btnApply{
+	-fx-background-color: #90CAF9;
+	-fx-background-radius: 7px;
+	-fx-text-fill: #0D47A1;
+}
+    
+#choiceBoxDate{
+	-fx-background-color: transparent;
+	-fx-background-radius: 7px;
+	-fx-text-fill: #0D47A1;
+	-fx-border-color: #EEEEEE;
+	-fx-border-radius: 7px;
+}
+
+
+
+#hboxAvatarUser{
+	
+}
+  
+#homePane{
+	-fx-background-color: transparent;
+}
+
+    
+#homePaneCenter{
+	-fx-background-color: transparent;
+}
+#homePaneCenter .view-port{
+	-fx-border-color: transparent;
+}
+    
+#homePaneTop{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 7px;
+}
+
+#homeStackCenter{
+	
+}   
+
+#homeVboxItems{
+	
+}
+
+#homeVboxCenter{
+	
+}
+    
+#imageUserName{
+	
+}
+
+    
+
+
+    
+#lbManagementPersonnel, #lbManagementTask, #lbTaskRequires{
+	-fx-text-fill: #565656;
+}
+ 
+#lbPoisition{
+	-fx-text-fill: #565656;
+}
+#lbUsername{
+	-fx-text-fill: #565656;
+}
+    
+#lbTaskComplete, #lbTasksMonth, #lbPersonnelCount, #lbDepartment{
+	-fx-text-fill: #565656;
+}
+   
+#lbTitleDepartment, #lbTitlePersonnelCount, #lbTitleTasksComplete, #lbTitleTasksMonth{
+	-fx-text-fill: #A5A5A5;
+}
+  
+#paneManagementPersonnel, #paneManagementTask, #paneTaskRequires{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 7px;
+}
+   
+#pickDate{
+	-fx-background-color: transparent;
+	-fx-background-radius: 4px;
+	-fx-text-fill: #0D47A1;
+	-fx-border-color: #EEEEEE;
+	-fx-border-radius: 4px;
+}
+#pickDate .arrow-button{
+	-fx-background-color: #e8ebee;
+}
+   
+#tableManagementPersonnel, #tableManagementTask, #tableTaskRequires{
+	-fx-background-color: transparent;
+}
+#tableManagementPersonnel .table-row-cell, #tableManagementTask .table-row-cell, #tableTaskRequires .table-row-cell{
+	-fx-pref-height: 40px;
+	-fx-table-cell-border-color: transparent;
+	-fx-font-size: 14;
+}
+#tableManagementPersonnel .column-header, #tableManagementTask .column-header, #tableTaskRequires .column-header{
+	-fx-background-color: #F4F4F9;
+	-fx-pref-height: 40px;
+
+}
+#tableManagementPersonnel .column-header .label, #tableManagementTask .column-header .label, #tableTaskRequires .column-header .label{
+	-fx-font-size: 14;
+	-fx-font-weight: 600;
+	-fx-text-fill: #565656;
+}
+    
+#tmpEmail, #tmpID , #tmpName , #tmpPhone , #tmpTaskComplete , #tmpTaskDelay , #tmpTotalTask {
+	-fx-alignment: center ;
+}
+
+    
+#tmtContents, #tmtFinishDate, #tmtStartDate, #tmtTaskID, #tmtFinishTime, #tmtStartTime, #tmtTitle, #tmtTo{
+	-fx-alignment: center ;
+}
+    
+#ttrAction , #ttrContents , #ttrFrom , #ttrStatus , #ttrTaskID , #ttrTime , #ttrTitle{
+	
+}
+
+    
+#vBoxDepartments{
+	
+}
+
+    
+#vBoxPersonnelCount{
+	
+}
+
+    
+#vBoxTaskComplete{
+	
+}
+
+    
+#vBoxTasksAssigned{
+	
+}
