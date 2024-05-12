@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StaffList.EditDialog.EditStaffDialogController">
+    <children>
+        <Label layoutX="14.0" layoutY="14.0" text="First Name" />
+        <TextField fx:id="firstNameField" layoutX="100.0" layoutY="10.0" />
+
+        <Label layoutX="14.0" layoutY="54.0" text="Last Name" />
+        <TextField fx:id="lastNameField" layoutX="100.0" layoutY="50.0" />
+
+        <Label layoutX="14.0" layoutY="94.0" text="Phone Number" />
+        <TextField fx:id="phoneNumberField" layoutX="100.0" layoutY="90.0" />
+
+        <Label layoutX="14.0" layoutY="134.0" text="Email" />
+        <TextField fx:id="emailField" layoutX="100.0" layoutY="130.0" />
+
+        <Label layoutX="14.0" layoutY="174.0" text="Department" />
+        <TextField fx:id="departmentField" layoutX="100.0" layoutY="170.0" />
+
+        <Label layoutX="14.0" layoutY="214.0" text="Position" />
+        <TextField fx:id="positionField" layoutX="100.0" layoutY="210.0" />
+
+        <Button fx:id="okButton" layoutX="220.0" layoutY="350.0" text="OK" />
+        <Button fx:id="cancelButton" layoutX="300.0" layoutY="350.0" text="Cancel" />
+    </children>
+</AnchorPane>

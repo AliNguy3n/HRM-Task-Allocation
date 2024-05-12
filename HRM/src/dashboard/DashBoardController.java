@@ -22,7 +22,8 @@ import java.util.ResourceBundle;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class DashBoardController implements Initializable{
-
+    @FXML
+    public ToggleButton btnStaffList;
     @FXML
     private ToggleGroup NavBar;
 
@@ -68,6 +69,7 @@ public class DashBoardController implements Initializable{
     @FXML
     private HBox paneTitleNav;
 
+
     @FXML
     void handleDashBoardNav(ActionEvent event) {
     	if(event.getSource()==btnHome) {
@@ -78,6 +80,10 @@ public class DashBoardController implements Initializable{
     	}
     	if(event.getSource()==btnAccounts) {
     		displayPaneElement("/accounts/Accounts.fxml");
+    	}
+        if(event.getSource()==btnStaffList) {
+            System.out.println("clicked");
+    		displayPaneElement("/StaffList/StaffList.fxml");
     	}
     	if(event.getSource()==btnSettings) {
     		displayPaneElement("/settings/Settings.fxml");
