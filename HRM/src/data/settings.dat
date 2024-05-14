@@ -1,7 +1,0 @@
-notification:true
-databaseName:HRMandTaskAllocation
-port:1433
-serverName:LAPTOP-NAL17MNF
-usernameServer:sa
-pageStartup:Home
-passwordServer:1234
