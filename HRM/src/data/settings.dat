@@ -1,0 +1,7 @@
+notification:true
+databaseName:HRMandTaskAllocation
+port:1433
+serverName:DESKTOP-TA46JH7\MSSQLSEVER
+usernameServer:sa
+pageStartup:Home
+passwordServer:Nghia456
