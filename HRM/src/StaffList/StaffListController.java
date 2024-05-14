@@ -222,6 +222,7 @@ public class StaffListController implements Initializable {
                 staffList.add(newStaff); // Cập nhật lại TableView
 
                 loadStaffData();
+                staffTable.refresh();
             }
         } catch (IOException e) {
             e.printStackTrace();

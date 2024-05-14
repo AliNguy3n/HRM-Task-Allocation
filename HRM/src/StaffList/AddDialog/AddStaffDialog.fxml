@@ -6,37 +6,38 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StaffList.AddDialog.AddStaffDialogController">
+<AnchorPane prefHeight="447.0" prefWidth="400" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StaffList.AddDialog.AddStaffDialogController">
     <children>
-        <Label layoutX="14.0" layoutY="14.0" text="First Name" />
-        <TextField fx:id="firstNameField" layoutX="100.0" layoutY="10.0" />
+        <Label layoutX="28.0" layoutY="47.0" text="First Name" />
+        <TextField fx:id="firstNameField" layoutX="114.0" layoutY="43.0" />
 
-        <Label layoutX="14.0" layoutY="54.0" text="Last Name" />
-        <TextField fx:id="lastNameField" layoutX="100.0" layoutY="50.0" />
+        <Label layoutX="28.0" layoutY="87.0" text="Last Name" />
+        <TextField fx:id="lastNameField" layoutX="114.0" layoutY="83.0" />
 
-        <Label layoutX="14.0" layoutY="94.0" text="Phone Number" />
-        <TextField fx:id="phoneNumberField" layoutX="100.0" layoutY="90.0" />
+        <Label layoutX="28.0" layoutY="127.0" text="Phone Number" />
+        <TextField fx:id="phoneNumberField" layoutX="114.0" layoutY="123.0" />
 
-        <Label layoutX="14.0" layoutY="134.0" text="Email" />
-        <TextField fx:id="emailField" layoutX="100.0" layoutY="130.0" />
+        <Label layoutX="28.0" layoutY="167.0" text="Email" />
+        <TextField fx:id="emailField" layoutX="114.0" layoutY="163.0" />
 
-        <Label layoutX="14.0" layoutY="174.0" text="Department" />
-        <TextField fx:id="departmentField" layoutX="100.0" layoutY="170.0" />
+        <Label layoutX="28.0" layoutY="207.0" text="Department" />
+        <TextField fx:id="departmentField" layoutX="114.0" layoutY="203.0" />
 
-        <Label layoutX="14.0" layoutY="214.0" text="Position" />
-        <TextField fx:id="positionField" layoutX="100.0" layoutY="210.0" />
+        <Label layoutX="28.0" layoutY="247.0" text="Position" />
+        <TextField fx:id="positionField" layoutX="114.0" layoutY="243.0" />
 
-        <Label layoutX="14.0" layoutY="254.0" text="Username" />
-        <TextField fx:id="usernameField" layoutX="100.0" layoutY="250.0" />
+        <Label layoutX="28.0" layoutY="287.0" text="Username" />
+        <TextField fx:id="usernameField" layoutX="114.0" layoutY="283.0" />
 
-        <Label layoutX="14.0" layoutY="294.0" text="Password" />
-        <PasswordField fx:id="passwordField" layoutX="100.0" layoutY="290.0" />
+        <Label layoutX="28.0" layoutY="327.0" text="Password" />
+        <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="323.0" />
 
-        <Label layoutX="14.0" layoutY="334.0" text="Salary" />
-        <TextField fx:id="salaryField" layoutX="100.0" layoutY="330.0" />
+        <Label layoutX="28.0" layoutY="367.0" text="Salary" />
+        <TextField fx:id="salaryField" layoutX="114.0" layoutY="363.0" />
 
-        <Button fx:id="okButton" layoutX="220.0" layoutY="370.0" text="OK" />
-        <Button fx:id="cancelButton" layoutX="300.0" layoutY="370.0" text="Cancel" />
+        <Button fx:id="okButton" layoutX="233.0" layoutY="395.0" text="OK" />
+        <Button fx:id="cancelButton" layoutX="288.0" layoutY="395.0" text="Cancel" />
+      <Label layoutX="28.0" layoutY="12.0" text="Avatar" />
+      <Button fx:id="addImage" layoutX="114.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Browse..." />
     </children>
 </AnchorPane>
-

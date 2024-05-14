@@ -110,15 +110,6 @@ public class StaffDAOImpl implements StaffListDAO {
                 //Image avatarImage = new Image(avatarStream);
                 StaffDTO staff = new StaffDTO();
                 staff.setId(resultSet.getLong("id"));
-
-                byte[] varBinaryData = resultSet.getBytes("avatar");
-                for(byte x : varBinaryData){
-                    System.out.println(x);
-                }
-//                String convertedString = new String(varBinaryData);
-                InputStream inputStream = new ByteArrayInputStream(varBinaryData);
-                staff.setAvatarStream(inputStream);
-
                 staff.setFirstName(resultSet.getString("first_name"));
                 staff.setLastName(resultSet.getString("last_name"));
                 staff.setEmail(resultSet.getString("email"));
@@ -130,8 +121,6 @@ public class StaffDAOImpl implements StaffListDAO {
                 staff.setPermission(resultSet.getLong("permission"));
                 staff.setStatus(resultSet.getString("status"));
                 staff.setSalary(resultSet.getFloat("salary"));
-                System.out.println(staff.getId());
-                //staffList.add(new StaffDTO(resultSet.getLong("id"), avatarStream  , resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("email"), resultSet.getString("phone_number"), resultSet.getString("department"), resultSet.getString("position"), resultSet.getString("user_name"), resultSet.getString("password"), resultSet.getLong("permission"), resultSet.getString("status"), resultSet.getFloat("salary")));
                 staffList.add(staff);
             }
         } catch (SQLException e) {

@@ -2,13 +2,16 @@ package StaffList.AddDialog;
 
 import Models.DTO.StaffDTO;
 import StaffList.StaffListController;
+import dashboard.DashBoardController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,6 +38,10 @@ public class AddStaffDialogController implements Initializable {
     private Button okButton;
     @FXML
     private Button cancelButton;
+
+    @FXML
+    private Button addImage;
+
 
     private StaffListController staffListController;
     private StaffDTO staff;
@@ -97,7 +104,19 @@ public class AddStaffDialogController implements Initializable {
             confirmed = true;
             closeWindow();
         });
+        addImage.setOnAction(e -> {
+            FileChooser openFile = new FileChooser();
+            openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg")); // Set đuôi cho file ảnh
 
+//            File file = openFile.showOpenDialog(dbc..getScene().getWindow());
+//            if (file != null) {
+//                data.path = file.getAbsolutePath();
+//                image = new Image(file.toURI().toString(), 200, 160, false, true); // preserveRatio(false) : không giữ tỉ lệ gốc của ảnh ( và ngược lại ),Smooth(true): làm mịn khi phóng to ( và ngược lại )
+//                avatar_imageView.setImage(image); // Truyền hình ảnh
+//                avatar_imageView1.setImage(image);
+//
+//            }
+        });
         cancelButton.setOnAction(event -> closeWindow());
     }
 }
