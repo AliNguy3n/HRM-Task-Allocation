@@ -7,6 +7,7 @@ import Models.DAO.StaffListDAO;
 import Models.DTO.StaffDTO;
 import StaffList.AddDialog.AddStaffDialogController;
 import StaffList.EditDialog.EditStaffDialogController;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,16 +22,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class StaffListController implements Initializable {
     @FXML
-    private TableColumn<StaffDTO, Image> avatarCol;
+    private TableColumn<StaffDTO, ImageView> avatarCol;
     @FXML
     private TableColumn<StaffDTO, String> departmentCol;
     @FXML
@@ -68,29 +69,29 @@ public class StaffListController implements Initializable {
         loadStaffData();
 
         // Cấu hình các cột
-        avatarCol.setCellValueFactory(new PropertyValueFactory<>("avatar"));
-        avatarCol.setCellFactory(column ->{
-             ImageView imageView = new ImageView();
-             return new TableCell<StaffDTO, Image>(){
-                 @Override
-                 protected void updateItem(Image item, boolean empty) {
-                     super.updateItem(item, empty);
-                     if(empty || item == null) {
-                         setGraphic(null);
-                     }else {
-                         imageView.setImage(item);
-                         setGraphic(imageView);
-                     }
-                 }
-             };
 
-        });
+
         fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         staffIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         positionCol.setCellValueFactory(new PropertyValueFactory<>("position"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         departmentCol.setCellValueFactory(new PropertyValueFactory<>("department"));
+
+        avatarCol.setCellValueFactory(cellData -> {
+            String avatarPath = cellData.getValue().getAvatarPath();
+            ImageView imageView = new ImageView();
+            if (avatarPath != null && !avatarPath.isEmpty() && new File(avatarPath).exists()) {
+                imageView.setImage(new Image(new File(avatarPath).toURI().toString(), true));
+                imageView.setFitHeight(50);
+                imageView.setFitWidth(50);
+                imageView.setPreserveRatio(true);
+            } else {
+//                imageView.setImage(new Image("file:D:/IT/11.eProject02/code/HRM-Task-Allocation/HRM/src/asset/avatar/a.jpg", true)); // Sử dụng "file:"
+            }
+            return new SimpleObjectProperty<>(imageView);
+        });
+
 
         // Cấu hình cột "Edit"
         editCol.setCellFactory(col -> new TableCell<>() {

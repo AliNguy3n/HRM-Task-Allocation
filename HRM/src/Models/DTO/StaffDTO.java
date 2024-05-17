@@ -20,47 +20,9 @@ public class StaffDTO {
     private Long permission;
     private String status;
     private Float salary;
-    private ObjectProperty<Image> avatar = new SimpleObjectProperty<>();
-    private InputStream avatarStream;
+    private String avatarPath;
 
-    @Override
-    public String toString() {
-        return "StaffDTO{" +
-                "Id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", department='" + department + '\'' +
-                ", position='" + position + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", permission=" + permission +
-                ", status='" + status + '\'' +
-                ", salary=" + salary +
-                ", image=" + avatar +
-                ", avatarStream=" + avatarStream +
-                '}';
-    }
-
-    public StaffDTO(Long id, InputStream avatarStream, String firstName, String lastName, String email, String phoneNumber, String department, String position, String userName, String password, Long permission, String status, Float salary) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.department = department;
-        this.position = position;
-        this.userName = userName;
-        this.password = password;
-        this.permission = permission;
-        this.status = status;
-        this.salary = salary;
-        this.avatarStream = avatarStream;
-        this.fullName = String.valueOf(new SimpleStringProperty(firstName + " " + lastName));
-    }
-
-    public StaffDTO(Long id, String fullName, String firstName, String lastName, String email, String phoneNumber, String department, String position, String userName, String password, Long permission, String status, Float salary) {
+    public StaffDTO(Long id, String fullName, String firstName, String lastName, String email, String phoneNumber, String department, String position, String userName, String password, Long permission, String status, Float salary, String avatarPath) {
         this.id = id;
         this.fullName = fullName;
         this.firstName = firstName;
@@ -74,29 +36,25 @@ public class StaffDTO {
         this.permission = permission;
         this.status = status;
         this.salary = salary;
+        this.avatarPath = avatarPath;
     }
 
-    public StaffDTO() {
-    }
-
-    public Image getImage() {
-        return avatar.get();
-    }
-
-    public ObjectProperty<Image> imageProperty() {
-        return avatar;
-    }
-
-    public void setImage(Image image) {
-        this.avatar.set(image);
-    }
+    public StaffDTO() {}
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getFirstName() {
@@ -187,38 +145,11 @@ public class StaffDTO {
         this.salary = salary;
     }
 
-    public ObservableValue<Image> avatarProperty() {
-        return avatar;
-    }
-    // Getter và setter cho avatarStream
-    public InputStream getAvatarStream() {
-        return avatarStream;
+    public String getAvatarPath() {
+        return avatarPath;
     }
 
-    public void setAvatarStream(InputStream avatarStream) {
-        this.avatarStream = avatarStream;
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
-    public Image getAvatar() {
-        return avatar.get();
-    }
-
-    public void setAvatar(Image avatar) {
-        this.avatar.set(avatar);
-    }
-
-    public StringProperty fullNameProperty() {
-        return new SimpleStringProperty(this.getFirstName() + " " + this.getLastName());
-    }
-
-    // Phương thức getter cho fullName
-    public String getFullName() {
-        return this.fullName;
-    }
-
-    // Phương thức setter cho fullName
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-
 }

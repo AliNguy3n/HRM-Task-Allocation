@@ -27,11 +27,9 @@ public class StaffDAOImpl implements StaffListDAO {
     public void addStaff(StaffDTO staffs) {
         try {
 
-//            String sql2 = "INSERT INTO hrmandtaskallocation.dbo.staff (id, first_name, last_name, email, phone_number, department, position,\n" +
-//                    "                                            user_name, password, permission, status, salary)";
             String sql = "INSERT INTO staff ( avatar, first_name, last_name, email, phone_number, department, position,user_name, password, permission, status, salary) VALUES (?, ?, ?, ? , ? , ? ,? , ? , ? , ? , ? , ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setBinaryStream(1, staffs.getAvatarStream());
+           statement.setString(1, staffs.getAvatarPath());
             statement.setString(2, staffs.getFirstName());
             statement.setString(3, staffs.getLastName());
             statement.setString(4, staffs.getEmail());
@@ -99,19 +97,16 @@ public class StaffDAOImpl implements StaffListDAO {
     public List<StaffDTO> getAllStaffs() {
         List<StaffDTO> staffList = new ArrayList<>();
 
-        // Tạo đối tượng StaffDTO và thêm vào danh sách
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM staff");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                // Lấy dữ liệu hình ảnh từ ResultSet
-                //InputStream avatarStream = resultSet.getBinaryStream("avatar");
-                // Tạo đối tượng Image từ InputStream
-                //Image avatarImage = new Image(avatarStream);
                 StaffDTO staff = new StaffDTO();
                 staff.setId(resultSet.getLong("id"));
+                staff.setAvatarPath(resultSet.getString("avatar"));
                 staff.setFirstName(resultSet.getString("first_name"));
                 staff.setLastName(resultSet.getString("last_name"));
+                staff.setFullName(staff.getFirstName() + " " + staff.getLastName());
                 staff.setEmail(resultSet.getString("email"));
                 staff.setPhoneNumber(resultSet.getString("phone_number"));
                 staff.setDepartment(resultSet.getString("department"));

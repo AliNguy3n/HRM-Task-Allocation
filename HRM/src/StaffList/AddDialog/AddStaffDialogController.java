@@ -2,7 +2,6 @@ package StaffList.AddDialog;
 
 import Models.DTO.StaffDTO;
 import StaffList.StaffListController;
-import dashboard.DashBoardController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,50 +12,24 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 public class AddStaffDialogController implements Initializable {
     @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField phoneNumberField;
-    @FXML
-    private TextField emailField;
-    @FXML
-    private TextField departmentField;
-    @FXML
-    private TextField positionField;
-    @FXML
-    private TextField usernameField;
+    private TextField firstNameField, lastNameField, phoneNumberField, emailField, departmentField, positionField, usernameField, salaryField;
     @FXML
     private PasswordField passwordField;
     @FXML
-    private TextField salaryField;
-    @FXML
-    private Button okButton;
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button addImage;
-
+    private Button okButton, cancelButton, addImage;
 
     private StaffListController staffListController;
     private StaffDTO staff;
     private boolean confirmed = false;
 
-//    @FXML
-//    public void initialize() {
-//        okButton.setOnAction(event -> {
-//            updateStaffData();
-//            confirmed = true;
-//            closeWindow();
-//        });
-//
-//        cancelButton.setOnAction(event -> closeWindow());
-//    }
     public void setStaffListController(StaffListController controller) {
         this.staffListController = controller;
     }
@@ -97,6 +70,31 @@ public class AddStaffDialogController implements Initializable {
         stage.close();
     }
 
+    @FXML
+    private void browseImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            try {
+                // Xác định thư mục 'avatars' ngay trong thư mục gốc của project
+                Path projectRoot = Paths.get(System.getProperty("user.dir"));
+                Path dest = Paths.get(projectRoot.toString(), "src", "asset", "avatar", file.getName());
+
+                // Đảm bảo thư mục tồn tại
+                if (!Files.exists(dest.getParent())) {
+                    Files.createDirectories(dest.getParent());
+                }
+
+                Files.copy(file.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
+                staff.setAvatarPath(dest.toString()); // Lưu đường dẫn tương đối vào đối tượng staff
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         okButton.setOnAction(event -> {
@@ -104,19 +102,7 @@ public class AddStaffDialogController implements Initializable {
             confirmed = true;
             closeWindow();
         });
-        addImage.setOnAction(e -> {
-            FileChooser openFile = new FileChooser();
-            openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg")); // Set đuôi cho file ảnh
-
-//            File file = openFile.showOpenDialog(dbc..getScene().getWindow());
-//            if (file != null) {
-//                data.path = file.getAbsolutePath();
-//                image = new Image(file.toURI().toString(), 200, 160, false, true); // preserveRatio(false) : không giữ tỉ lệ gốc của ảnh ( và ngược lại ),Smooth(true): làm mịn khi phóng to ( và ngược lại )
-//                avatar_imageView.setImage(image); // Truyền hình ảnh
-//                avatar_imageView1.setImage(image);
-//
-//            }
-        });
+        addImage.setOnAction(e -> browseImage());
         cancelButton.setOnAction(event -> closeWindow());
     }
 }

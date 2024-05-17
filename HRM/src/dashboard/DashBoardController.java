@@ -76,7 +76,7 @@ public class DashBoardController implements Initializable{
     		displayPaneElement("/home/Home.fxml");
     	}
     	if(event.getSource()==btnManage) {
-    		displayPaneElement("/manage/Manage.fxml");
+    		displayPaneElement("/Manage/Manage.fxml");
     	}
     	if(event.getSource()==btnAccounts) {
     		displayPaneElement("/accounts/Accounts.fxml");

@@ -1,2 +1,5 @@
-package manage;public class ManageController {
+package Manage;
+
+public class ManageController {
+
 }

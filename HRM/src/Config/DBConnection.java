@@ -19,14 +19,4 @@ public class DBConnection {
             throw new RuntimeException(e);
         }
     }
-    //test Database
-//    public static void main(String[] args) {
-//        Connection connection = DBConnection.getConnection();
-//        if (connection != null) {
-//            System.out.println("Connected to the database");
-//        } else {
-//            System.out.println("Failed to connect to the database");
-//        }
-//    }
-
 }

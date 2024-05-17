@@ -2,8 +2,11 @@ package application;
 	
 import Config.DBConnection;
 import Models.DAO.Impl.StaffDAOImpl;
+import Models.DAO.Impl.StaffEvaluationDAOImpl;
+import Models.DAO.StaffEvaluationDAO;
 import Models.DAO.StaffListDAO;
 import Models.DTO.StaffDTO;
+import Models.DTO.StaffEvaluationDTO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,9 +34,27 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-//		testDatabaseDAO();
+		testDatabaseDAO();
 
 
+	}
+	public void testDatabaseDAO(){
+		try{
+			Connection conn = DBConnection.getConnection();
+			if (conn != null) {
+                System.out.println("Connected to the database");
+            } else {
+                System.out.println("Failed to connect to the database");
+            }
+
+			StaffEvaluationDAO staffEvaluationDAO = new StaffEvaluationDAOImpl(conn);
+			List<StaffEvaluationDTO> evaluationDTOS =  staffEvaluationDAO.getAllEvaluation();
+			for(StaffEvaluationDTO evaluationDTO : evaluationDTOS){
+				System.out.println(evaluationDTO.toString());
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 //	private void testDatabaseDAO(){
 //		try {
