@@ -1,0 +1,25 @@
+#requestContainer{
+	-fx-background-color: transparent;
+}
+
+#requestUsername{
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #6F65E7;
+	-fx-background-radius: 18 18 18 18;
+}
+#requestItem{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 5px;
+}
+
+#txtFlow{
+	
+}
+
+#lbRequestContent{
+	-fx-text-fill: #565656;
+}
+
+#lbTime{
+	-fx-text-fill: #565656;
+}

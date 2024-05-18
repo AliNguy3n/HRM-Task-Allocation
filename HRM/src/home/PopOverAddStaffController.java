@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.ListSelectionView;
 
 import application.Main;
-import dap.DAPCreateTask;
+import dap.DAPTask;
 
 public class PopOverAddStaffController implements Initializable{
 	@FXML
@@ -35,7 +35,6 @@ public class PopOverAddStaffController implements Initializable{
 	// Event Listener on Button[#popOverbtnAdd].onAction
 	@FXML
 	public void handlePopOverbtn(ActionEvent event) {
-		System.out.println("Da nhan");
 		staffAddValue = listSelectionViewPane.getTargetItems().toArray(new String[0]);
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Complete!");
@@ -48,11 +47,18 @@ public class PopOverAddStaffController implements Initializable{
 		ArrayList<String> allItems = new ArrayList<String>();
 		
 		
-		DAPCreateTask dap = new DAPCreateTask();
+		DAPTask dap = new DAPTask();
 		ResultSet rs = dap.select(Main.userLogin.getDepartment(), String.valueOf(Main.userLogin.getId()));
 		try {
 			while(rs.next()) {
-				allItems.add("ID:"+rs.getInt("ID")+"- Email:"+rs.getString("email"));
+				if(Main.userLogin.getPermission()==3) {
+					if(rs.getInt("ID")== Main.userLogin.getId()) {
+						allItems.add("ID:"+rs.getInt("ID")+"- Email:"+rs.getString("email"));
+					}
+				}else {
+					allItems.add("ID:"+rs.getInt("ID")+"- Email:"+rs.getString("email"));
+				}
+				
 
 			}
 		} catch (SQLException e) {

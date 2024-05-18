@@ -73,7 +73,13 @@ public class DashBoardController implements Initializable{
     @FXML
     void handleDashBoardNav(ActionEvent event) {
     	if(event.getSource()==btnHome) {
-    		displayPaneElement("/home/HomeManager.fxml");
+    		if(Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2) {
+    			displayPaneElement("/home/TaskManagementForManager.fxml");
+    		}
+    		else {
+    			displayPaneElement("/home/TaskManagementForStaff.fxml");
+    		}
+    		
     	}
     	if(event.getSource()==btnManage) {
     		displayPaneElement("/manage/Manage.fxml");
@@ -98,7 +104,14 @@ public class DashBoardController implements Initializable{
 		case "Accounts" -> displayPaneElement("/accounts/Accounts.fxml");
 		case "Manage" -> displayPaneElement("/manage/Manage.fxml");
 		case "Settings" -> displayPaneElement("/settings/Settings.fxml");
-		default -> displayPaneElement("/home/HomeManager.fxml");	
+		default -> {
+			if(Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2) {
+    			displayPaneElement("/home/TaskManagementForManager.fxml");
+    		}
+    		else {
+    			displayPaneElement("/home/TaskManagementForStaff.fxml");
+    		}
+		}	
 		}
 	}
 }

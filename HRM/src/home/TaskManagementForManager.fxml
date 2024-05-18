@@ -20,12 +20,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="homePane" minHeight="700.0" prefWidth="900.0" stylesheets="@../CSS/HomeManager.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.HomeManagerController">
+<BorderPane fx:id="homePane" minHeight="700.0" prefWidth="900.0" stylesheets="@../CSS/TaskManagementForManager.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.TaskManagementForManagerController">
    <top>
       <GridPane fx:id="homePaneTop" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="NEVER" minWidth="10.0" prefWidth="300.0" />
+          <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="230.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -34,14 +35,14 @@
           <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <HBox fx:id="hboxAvatarUser" prefHeight="50.0" prefWidth="200.0">
+            <HBox fx:id="hboxAvatarUser" prefHeight="50.0" prefWidth="220.0">
                <children>
                   <ImageView fx:id="imageUserName" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asset/BossAvatar01.png" />
                      </image>
                   </ImageView>
-                  <VBox prefHeight="60.0" prefWidth="159.0">
+                  <VBox prefHeight="60.0" prefWidth="170.0">
                      <children>
                         <Label fx:id="lbUsername" text="lbUserName">
                            <font>
@@ -63,7 +64,7 @@
                   <Insets bottom="20.0" left="20.0" right="5.0" top="20.0" />
                </GridPane.margin>
             </HBox>
-            <VBox fx:id="vBoxPersonnelCount" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <VBox fx:id="vBoxPersonnelCount" prefHeight="150.0" prefWidth="220.0" GridPane.rowIndex="1">
                <children>
                   <Label fx:id="lbTitlePersonnelCount" prefHeight="17.0" prefWidth="203.0" text="Management personnel count:" textFill="#a5a5a5">
                      <font>
@@ -86,7 +87,7 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </VBox>
-            <VBox fx:id="vBoxDepartments" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+            <VBox fx:id="vBoxDepartments" prefHeight="150.0" prefWidth="220.0" GridPane.rowIndex="2">
                <children>
                   <Label fx:id="lbTitleDepartment" prefHeight="17.0" prefWidth="203.0" text="Management departments:" textFill="#a5a5a5">
                      <font>
@@ -109,9 +110,9 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </VBox>
-            <VBox fx:id="vBoxTasksAssigned" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <VBox fx:id="vBoxTasksAssigned" prefHeight="150.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lbTitleTasksMonth" prefHeight="17.0" prefWidth="203.0" text="Tasks assigned this month: " textFill="#a5a5a5">
+                  <Label fx:id="lbTitleTasksMonth" prefHeight="17.0" prefWidth="203.0" text="Tasks assigned this time: " textFill="#a5a5a5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -129,9 +130,9 @@
                   </Label>
                </children>
             </VBox>
-            <VBox fx:id="vBoxTaskComplete" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <VBox fx:id="vBoxTaskComplete" prefHeight="200.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="lbTitleTasksComplete" prefHeight="20.0" prefWidth="310.0" text="Tasks assigned and completed this month:" textFill="#a5a5a5">
+                  <Label fx:id="lbTitleTasksComplete" prefHeight="20.0" prefWidth="310.0" text="Tasks completed this time:" textFill="#a5a5a5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -149,6 +150,7 @@
                   </Label>
                </children>
             </VBox>
+            <VBox fx:id="vBoxTopPaneChart1" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowSpan="3" />
          </children>
          <BorderPane.margin>
             <Insets bottom="3.0" />
@@ -156,7 +158,7 @@
       </GridPane>
    </top>
    <center>
-      <ScrollPane fx:id="homePaneCenter" fitToHeight="true" fitToWidth="true" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="homePaneCenter" fitToHeight="true" fitToWidth="true" pannable="true" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="3.0" top="3.0" />
          </BorderPane.margin>
@@ -183,7 +185,7 @@
                                  </font>
                               </Button>
                               <ChoiceBox fx:id="choiceBoxDate" layoutX="658.0" layoutY="10.0" prefHeight="25.0" prefWidth="86.0" AnchorPane.rightAnchor="160.0" />
-                              <TableView fx:id="tableManagementTask" layoutX="63.0" layoutY="41.0" maxWidth="300.0" prefHeight="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                              <TableView fx:id="tableManagementTask" layoutX="63.0" layoutY="41.0" prefHeight="350.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                 <columns>
                                   <TableColumn fx:id="tmtTaskID" prefWidth="62.0" text="Task ID" />
                                   <TableColumn fx:id="tmtTitle" prefWidth="102.0" text="Title" />
@@ -212,7 +214,7 @@
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="tableManagementPersonnel" layoutX="63.0" layoutY="41.0" prefHeight="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                              <TableView fx:id="tableManagementPersonnel" layoutX="63.0" layoutY="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                  <columns>
                                     <TableColumn fx:id="tmpID" prefWidth="62.0" text="ID" />
                                     <TableColumn fx:id="tmpName" prefWidth="102.0" text="Name" />
@@ -238,7 +240,7 @@
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="tableTaskRequires" layoutX="63.0" layoutY="41.0" prefHeight="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                              <TableView fx:id="tableTaskRequires" layoutX="63.0" layoutY="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                  <columns>
                                     <TableColumn fx:id="ttrTaskID" prefWidth="62.0" text="Task ID" />
                                     <TableColumn fx:id="ttrTitle" prefWidth="102.0" text="Title" />
@@ -259,7 +261,7 @@
                         </AnchorPane>
                      </children>
                   </VBox>
-                  <VBox fx:id="homeVboxItems" />
+                  <VBox fx:id="homeVboxItems" spacing="6.0" />
                </children>
             </StackPane>
          </content>

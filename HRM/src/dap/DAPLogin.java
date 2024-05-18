@@ -31,7 +31,6 @@ public class DAPLogin extends DAPCore{
 			st.close();
 			cnn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -49,7 +48,7 @@ public class DAPLogin extends DAPCore{
 	}
 
 	@Override
-	public int delete() {
+	public int delete(int param) {
 		// Phương thức này không được triển khai
 		return 0;
 	}

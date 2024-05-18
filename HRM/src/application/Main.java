@@ -42,6 +42,7 @@ public class Main extends Application {
 			if(obSettings.getValue("serverName")!=null) {
 				root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
 			}else {
+				obSettings.setValue("pageStartup", "Settings");
 				root = FXMLLoader.load(getClass().getResource("/dashboard/DashBoard.fxml"));
 			}
 			

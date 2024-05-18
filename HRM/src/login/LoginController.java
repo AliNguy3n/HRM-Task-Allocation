@@ -22,17 +22,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import threadapp.ThreadUpdateTask;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import application.Main;
 import dap.DAPLogin;
+import dap.DAPTask;
+import fio.FIOCore;
+import fio.FIOEncrypting;
 
 public class LoginController implements Initializable{
 
@@ -65,7 +70,9 @@ public class LoginController implements Initializable{
 
     @FXML
     private TextField txtUsername;
-
+    
+    HashMap<String, String> data = new HashMap<String, String>();
+    
     @FXML
     void handleLogin(ActionEvent event) throws SQLException {
     	if(event.getSource()==btnLogin) {
@@ -105,12 +112,23 @@ public class LoginController implements Initializable{
     			Main.userLogin.setUsername(res.getString("User_Name"));
     			Main.userLogin.setStatus(res.getString("Status"));
     			Main.userLogin.setDepartment(res.getString("Department"));
-    			Main.userLogin.setPermission(res.getString("Permission"));
+    			Main.userLogin.setPermission(res.getInt("Permission"));
     			Main.userLogin.setPhonenumber(res.getString("Phone_Number"));
     			Main.userLogin.setPosition(res.getString("Position"));
     			Main.userLogin.setSalary(res.getFloat("Salary"));
         		check = true;
         		
+        		ThreadUpdateTask thread = new ThreadUpdateTask();
+                thread.start();
+                if(checkboxRememberMe.isSelected()) {
+                	data.clear();
+                    data.put("userName", txtUsername.getText());
+                    data.put("password", txtPassword.getText());
+                    FIOEncrypting fio = new FIOEncrypting();
+                    fio.write("src/data/login.dat", false, data);
+                }
+                
+                
         	}else {
         		Alert alert = new Alert(AlertType.ERROR);
         		alert.setTitle("Login Message");
@@ -124,8 +142,14 @@ public class LoginController implements Initializable{
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		txtUsername.setText("admin");
-		txtPassword.setText("123");
+		FIOEncrypting fio = new FIOEncrypting();
+		try {
+			data = fio.readMap("src/data/login.dat");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		txtUsername.setText(data.get("userName"));
+		txtPassword.setText(data.get("password"));
 	}
     
 }
