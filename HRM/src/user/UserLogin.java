@@ -8,6 +8,7 @@ package user;
 
 public class UserLogin {
     int id;
+    String avatarPath;
     String firstname;
     String lastname;
     String email;
@@ -89,4 +90,11 @@ public class UserLogin {
         this.salary = salary;
     }
 
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
 }

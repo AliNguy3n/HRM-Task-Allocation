@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import user.UserLogin;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +23,9 @@ import java.util.List;
 
 
 public class Main extends Application {
+
+	public static UserLogin userLogin = new UserLogin();
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -34,87 +38,8 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		testDatabaseDAO();
-
-
 	}
-	public void testDatabaseDAO(){
-		try{
-			Connection conn = DBConnection.getConnection();
-			if (conn != null) {
-                System.out.println("Connected to the database");
-            } else {
-                System.out.println("Failed to connect to the database");
-            }
 
-			StaffEvaluationDAO staffEvaluationDAO = new StaffEvaluationDAOImpl(conn);
-			List<StaffEvaluationDTO> evaluationDTOS =  staffEvaluationDAO.getAllEvaluation();
-			for(StaffEvaluationDTO evaluationDTO : evaluationDTOS){
-				System.out.println(evaluationDTO.toString());
-			}
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-//	private void testDatabaseDAO(){
-//		try {
-//			// Kết nối vào cơ sở dữ liệu
-//			Connection connection = DBConnection.getConnection();
-//
-////			Kiêm tra kết nối
-//            if (connection != null) {
-//                System.out.println("Connected to the database");
-//            } else {
-//                System.out.println("Failed to connect to the database");
-//            }
-//
-//			// Tạo một DAO
-//			StaffListDAO staffDAO = new StaffDAOImpl(connection);
-////			File imageFile = new File("C:\\Users\\Admin\\Desktop\\ava.jpg");
-////			FileInputStream fis = new FileInputStream(imageFile);
-////			String sql = "INSERT INTO staff (first_name, last_name, email, phone_number, department, position,user_name, password, permission, status, salary) VALUES (?, ?, ? , ? , ? ,? , ? , ? , ? , ? , ?)";
-//
-////			 Thêm một user mới
-//			StaffDTO staffDTO = new StaffDTO();
-////			staffDTO.setAvatarStream(fis);
-//			staffDTO.setFirstName("user1");
-//			staffDTO.setLastName("password123");
-//			staffDTO.setEmail("@gmail.com");
-//			staffDTO.setPhoneNumber("2345");
-//			staffDTO.setDepartment("hhh");
-//			staffDTO.setPosition("sdfsdf");
-//			staffDTO.setUserName("eee");
-//			staffDTO.setPassword("password123");
-//			staffDTO.setPermission(1L);
-//			staffDTO.setStatus("1");
-//			staffDTO.setSalary(345F);
-//
-//			System.out.println(staffDTO);
-//
-//			staffDAO.addStaff(staffDTO);
-////
-////			// Update một user
-////			User user = userDAO.getUserById(1);
-////			user.setPassword("newpassword456");
-////			userDAO.updateUser(user);
-//////
-//////            // Delete một user
-//////            userDAO.deleteUser(1);
-//////
-////			// Lấy tất cả users
-//			List<StaffDTO> staffDTOS = staffDAO.getAllStaffs();
-//			for (StaffDTO u : staffDTOS) {
-//				System.out.println(u);
-//			}
-//
-//			connection.close();
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//		} catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-	
 	public static void main(String[] args) {
 		launch(args);
 	}

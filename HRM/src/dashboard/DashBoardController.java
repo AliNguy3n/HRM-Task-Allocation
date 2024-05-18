@@ -4,6 +4,7 @@ package dashboard;
 * @author Duc Linh
 */
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,8 +82,7 @@ public class DashBoardController implements Initializable{
     	if(event.getSource()==btnAccounts) {
     		displayPaneElement("/accounts/Accounts.fxml");
     	}
-        if(event.getSource()==btnStaffList) {
-            System.out.println("clicked");
+        if(event.getSource()==btnStaffList && !Main.userLogin.getPermission().equals("1")) {
     		displayPaneElement("/StaffList/StaffList.fxml");
     	}
     	if(event.getSource()==btnSettings) {
