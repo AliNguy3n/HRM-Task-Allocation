@@ -99,6 +99,9 @@ public class DashBoardController implements Initializable{
     	if(event.getSource()==btnSettings) {
     		displayPaneElement("/settings/Settings.fxml");
     	}
+        if(event.getSource()==btnStaffList) {
+            displayPaneElement("/StaffList/StaffList.fxml");
+        }
     }
     private void displayPaneElement(String pane) {
     	try {
@@ -109,6 +112,13 @@ public class DashBoardController implements Initializable{
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+        if (Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() == 2) {
+            btnStaffList.setVisible(true);
+        } else {
+            btnStaffList.setVisible(false);
+        }
+
 		switch (Main.obSettings.getValue("pageStartup")) {
 		case "Accounts" -> displayPaneElement("/account/Account.fxml");
 		case "Manage" -> displayPaneElement("/manage/Manage.fxml");

@@ -69,7 +69,7 @@ public class StaffDAOImpl implements StaffListDAO {
 
 
     public void updateStaffbyUserLogin(UserLogin user) {
-        String sql = "UPDATE staff SET first_name = ?, last_name = ?, phone_number = ?, email = ?, department = ?, position = ? WHERE id = ?";
+        String sql = "UPDATE staff SET first_name = ?, last_name = ?, phone_number = ?, email = ?, department = ?, position = ? , avatar = ? WHERE id = ?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, user.getFirstname());
@@ -78,12 +78,12 @@ public class StaffDAOImpl implements StaffListDAO {
             pstmt.setString(4, user.getEmail());
             pstmt.setString(5, user.getDepartment());
             pstmt.setString(6, user.getPosition());
-            pstmt.setLong(7, user.getId());
+            pstmt.setString(7, user.getAvatarPath());
+            pstmt.setLong(8, user.getId());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Thêm xử lý lỗi thích hợp nếu cần
         }
     }
 

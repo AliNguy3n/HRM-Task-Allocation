@@ -72,12 +72,12 @@ public class AccountController implements Initializable {
             phoneNumberField.setText(user.getPhonenumber());
             departmentField.setText(user.getDepartment());
             positionField.setText(user.getPosition());
-
             String avatarPath = user.getAvatarPath();
+            System.out.println(avatarPath);
             if (avatarPath != null && !avatarPath.isEmpty() && new File(avatarPath).exists()) {
                 avatarImageView.setImage(new Image(new File(avatarPath).toURI().toString()));
             } else {
-                // Sử dụng ảnh mặc định nếu avatarPath không hợp lệ
+                System.out.println("Default Image");
                 avatarImageView.setImage(new Image(getClass().getResource("/asset/BossAvatar01.png").toExternalForm()));
             }
             // Thiết lập hình ảnh thành hình tròn
@@ -136,7 +136,6 @@ public class AccountController implements Initializable {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the user into the controller
             EditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage); // Thiết lập dialogStage
             controller.setUser(user);
@@ -170,7 +169,7 @@ public class AccountController implements Initializable {
 
             ChangePasswordDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setUser(user); // Thiết lập người dùng hiện tại cho controller
+            controller.setUser(user);
 
             dialogStage.showAndWait();
 

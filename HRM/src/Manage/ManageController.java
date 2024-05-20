@@ -150,13 +150,13 @@ public class ManageController implements Initializable {
 
     private void updatePieChart(double mark) {
         // Ensure the mark does not exceed 10
-        if (mark > 10) {
-            mark = 10;
+        if (mark > 100) {
+            mark = 100;
         }
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Achieved", mark),
-                new PieChart.Data("Remaining", 10 - mark)
+                new PieChart.Data("Remaining", 100 - mark)
         );
 
         // Update the PieChart data
@@ -224,13 +224,13 @@ public class ManageController implements Initializable {
                 .orElse(0);
 
         // Ensure the average mark does not exceed 10
-        if (averageMark > 10) {
-            averageMark = 10;
+        if (averageMark > 100) {
+            averageMark = 100;
         }
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Achieved", averageMark),
-                new PieChart.Data("Remaining", 10 - averageMark)
+                new PieChart.Data("Remaining", 100 - averageMark)
         );
 
         // Update the PieChart data

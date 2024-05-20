@@ -107,6 +107,7 @@ public class LoginController implements Initializable{
     		DAPLogin login = new DAPLogin();
     		ResultSet res = login.select(txtUsername.getText(), txtPassword.getText());
     		if(res.next()) {
+				Main.userLogin.setAvatarPath(res.getString("avatar"));
     			Main.userLogin.setId(res.getInt("ID"));
     			Main.userLogin.setFirstname(res.getString("First_Name"));
     			Main.userLogin.setLastname(res.getString("Last_Name"));
@@ -118,6 +119,7 @@ public class LoginController implements Initializable{
     			Main.userLogin.setPhonenumber(res.getString("Phone_Number"));
     			Main.userLogin.setPosition(res.getString("Position"));
     			Main.userLogin.setSalary(res.getFloat("Salary"));
+				Main.userLogin.setPassword(res.getString("password"));
         		check = true;
         		
         		ThreadUpdateTask thread = new ThreadUpdateTask();

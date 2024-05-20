@@ -13,7 +13,7 @@
         <Label layoutX="71.0" layoutY="117.0" text="Last Name" />
         <TextField fx:id="lastNameField" layoutX="177.0" layoutY="113.0" />
 
-        <Label layoutX="71.0" layoutY="157.0" text="Phone Numb" />
+        <Label layoutX="71.0" layoutY="157.0" text="Phone Number" />
         <TextField fx:id="phoneNumberField" layoutX="177.0" layoutY="153.0" />
 
         <Label layoutX="71.0" layoutY="197.0" text="Email" />
@@ -21,5 +21,10 @@
 
         <Button fx:id="okButton" layoutX="282.0" layoutY="243.0" onAction="#handleOk" text="OK" />
         <Button fx:id="cancelButton" layoutX="349.0" layoutY="243.0" onAction="#handleCancel" text="Cancel" />
+
+        <!-- Nút để chọn avatar mới -->
+        <Button fx:id="changeAvatarButton" layoutX="177.0" layoutY="280.0" onAction="#handleChangeAvatar" text="Change Avatar" />
     </children>
 </AnchorPane>
+
+
