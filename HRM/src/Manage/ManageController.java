@@ -86,7 +86,6 @@ public class ManageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Connection connection = DBConnection.getConnection();
         staffDAO = new StaffTaskDAOImpl(connection);
-
         list = FXCollections.observableArrayList();
         filteredList = FXCollections.observableArrayList();
 
@@ -114,6 +113,7 @@ public class ManageController implements Initializable {
             setStaffDetails(firstStaffTask);
             calculateAndSetAverageMark(staffData);
             populateMonthlyMarkChart(staffData);
+            System.out.println(staffData);
         }
         list.setAll(staffData);
         populateMonthFilterComboBox(staffData);

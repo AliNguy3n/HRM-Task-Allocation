@@ -24,6 +24,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import application.Main;
 
 public class DashBoardController implements Initializable{
+
 	@FXML
     private ToggleGroup NavBar;
 
@@ -90,7 +91,7 @@ public class DashBoardController implements Initializable{
     		}
     	}
     	if(event.getSource()==btnManage) {
-    		displayPaneElement("/manage/Manage.fxml");
+    		displayPaneElement("/Manage/Manage.fxml");
     	}
     	if(event.getSource()==btnAccount) {
     		displayPaneElement("/account/Account.fxml");
