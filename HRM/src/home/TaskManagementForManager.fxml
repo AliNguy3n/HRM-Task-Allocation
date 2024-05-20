@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="homePane" minHeight="700.0" prefWidth="700.0" stylesheets="@../CSS/TaskManagementForManager.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.TaskManagementForManagerController">
+<BorderPane fx:id="homePane" stylesheets="@../CSS/TaskManagementForManager.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.TaskManagementForManagerController">
    <top>
       <GridPane fx:id="homePaneTop" BorderPane.alignment="CENTER">
         <columnConstraints>

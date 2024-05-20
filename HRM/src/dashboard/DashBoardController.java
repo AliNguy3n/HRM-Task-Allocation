@@ -24,9 +24,11 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import application.Main;
 
 public class DashBoardController implements Initializable{
+	@FXML
+    private ToggleGroup NavBar;
 
     @FXML
-    private ToggleGroup NavBar;
+    private ToggleGroup NavBar1;
 
     @FXML
     private ToggleButton btnAccount;
@@ -41,13 +43,16 @@ public class DashBoardController implements Initializable{
     private ToggleButton btnSettings;
 
     @FXML
+    private ToggleButton btnStaffList;
+
+    @FXML
     private BorderPane dashBoardPane;
 
     @FXML
     private BorderPane dashboardView;
 
     @FXML
-    private FontIcon iKonAccounts;
+    private FontIcon iKonAccounts2;
 
     @FXML
     private FontIcon iKonHome;
@@ -57,6 +62,9 @@ public class DashBoardController implements Initializable{
 
     @FXML
     private FontIcon iKonSettings;
+
+    @FXML
+    private FontIcon iKonbtnAccounts1;
 
     @FXML
     private ImageView imageLogo;
@@ -70,16 +78,22 @@ public class DashBoardController implements Initializable{
     @FXML
     private HBox paneTitleNav;
 
+
     @FXML
     void handleDashBoardNav(ActionEvent event) {
     	if(event.getSource()==btnHome) {
-    		displayPaneElement("/home/HomeManager.fxml");
+    		if(Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2) {
+    			displayPaneElement("/home/TaskManagementForManager.fxml");
+    		}
+    		else {
+    			displayPaneElement("/home/TaskManagementForStaff.fxml");
+    		}
     	}
     	if(event.getSource()==btnManage) {
     		displayPaneElement("/manage/Manage.fxml");
     	}
     	if(event.getSource()==btnAccount) {
-    		displayPaneElement("/accounts/Account.fxml");
+    		displayPaneElement("/account/Account.fxml");
     	}
     	if(event.getSource()==btnSettings) {
     		displayPaneElement("/settings/Settings.fxml");
