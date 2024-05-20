@@ -102,6 +102,8 @@
 	-fx-pref-height: 40px;
 	-fx-table-cell-border-color: transparent;
 	-fx-font-size: 14;
+	-fx-padding: 6 0 5 0;
+	
 }
 #tableManagementPersonnel .column-header, #tableManagementTask .column-header, #tableTaskRequires .column-header{
 	-fx-background-color: #F4F4F9;

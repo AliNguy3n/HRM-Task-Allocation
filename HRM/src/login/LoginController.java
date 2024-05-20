@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import threadapp.ThreadUpdateTask;
 
 import java.io.IOException;
+import java.lang.ModuleLayer.Controller;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,11 +37,15 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import application.Main;
 import dap.DAPLogin;
 import dap.DAPTask;
+import dashboard.DashBoardController;
 import fio.FIOCore;
 import fio.FIOEncrypting;
 
 public class LoginController implements Initializable{
-
+	
+    @FXML
+    private Button btnForgot;
+    
     @FXML
     private AnchorPane anchorPaneLogin;
 
@@ -78,18 +83,35 @@ public class LoginController implements Initializable{
     	if(event.getSource()==btnLogin) {
     		if(checkLogin()) {
     			try {
-					Parent dashBoard = FXMLLoader.load(getClass().getResource("/dashboard/DashBoard.fxml"));
+    				FXMLLoader newLoader = new FXMLLoader(getClass().getResource("/dashboard/DashBoard.fxml"));
+					Parent dashBoard = newLoader.load();
 					Scene newScene = new Scene(dashBoard);
 					Stage newStage = new Stage();
 					newStage.setTitle("HRM & Task Allocation Appliction");
 					newStage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
 					newStage.setScene(newScene);
 					newStage.show();
+					DashBoardController dashBoardController = newLoader.getController();
+					dashBoardController.getButtonLogout().setOnAction(e ->{
+						try {
+							Stage  stage = new Stage();
+							stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/login/Login.fxml"))));
+							stage.centerOnScreen();
+							stage.show();
+							newStage.close();
+						} catch (IOException e1) {
+
+							e1.printStackTrace();
+						}
+					});
 					borderPaneLoginMain.getScene().getWindow().hide();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
     		}
+    	}
+    	else if(event.getSource() ==btnForgot) {
+    		displayForgotPass();
     	}
     }
     
@@ -150,6 +172,20 @@ public class LoginController implements Initializable{
 		}
 		txtUsername.setText(data.get("userName"));
 		txtPassword.setText(data.get("password"));
+	}
+	private void displayForgotPass() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/login/ForgotPassword.fxml"));
+		try {
+			Scene newScene = new Scene(loader.load());
+			Stage newStage = new Stage();
+			newStage.setTitle("Forgot Password - HRM APP");
+			newStage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
+			newStage.setScene(newScene);
+			newStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
     
 }

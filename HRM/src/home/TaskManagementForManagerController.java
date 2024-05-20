@@ -150,7 +150,7 @@ public class TaskManagementForManagerController implements Initializable{
     private TableView<TaskItem> tableManagementTask;
 
     @FXML
-    private TableView<?> tableTaskRequires;
+    private TableView<RequestItem> tableTaskRequires;
 
     @FXML
     private TableColumn<StaffItem, String> tmpEmail;
@@ -201,25 +201,25 @@ public class TaskManagementForManagerController implements Initializable{
     private TableColumn<TaskItem, Integer> tmtTo;
 
     @FXML
-    private TableColumn<?, ?> ttrAction;
+    private TableColumn<RequestItem, String> ttrAction;
 
     @FXML
-    private TableColumn<?, ?> ttrContents;
+    private TableColumn<RequestItem, String> ttrContents;
 
     @FXML
-    private TableColumn<?, ?> ttrFrom;
+    private TableColumn<RequestItem, String> ttrFrom;
 
     @FXML
-    private TableColumn<?, ?> ttrStatus;
+    private TableColumn<RequestItem, String> ttrStatus;
 
     @FXML
-    private TableColumn<?, ?> ttrTaskID;
+    private TableColumn<RequestItem, Integer> ttrTaskID;
 
     @FXML
-    private TableColumn<?, ?> ttrTime;
+    private TableColumn<RequestItem, Date> ttrTime;
 
     @FXML
-    private TableColumn<?, ?> ttrTitle;
+    private TableColumn<RequestItem, String> ttrTitle;
 
     @FXML
     private VBox vBoxDepartments;
@@ -239,6 +239,8 @@ public class TaskManagementForManagerController implements Initializable{
     String[] date = {"7 days","14 days", "21 day", "30 days", "60 days"};
     ObservableList<TaskItem> taskList = FXCollections.observableArrayList();
     ObservableList<StaffItem> staffList = FXCollections.observableArrayList();
+    ObservableList<RequestItem> requestList = FXCollections.observableArrayList();
+    
     private Tile donutChartTile;
     int totalTasks = 0;
     int tasksComplete = 0;
@@ -271,8 +273,10 @@ public class TaskManagementForManagerController implements Initializable{
 		choiceBoxDate.setValue("30 days");
 		setTaskTableProperty();
 		setPersonTableProperty();
+		setRequestTableProperty();
 		setTaskInterface();
 		setPersonInterface();
+		setRequestInterface();
 		setDonutChartInterface();
 		
 		
@@ -339,6 +343,7 @@ public class TaskManagementForManagerController implements Initializable{
 										alert.setTitle("Congratulation!");
 										alert.setContentText("Task has been Deleted!");
 										alert.show();
+										setTaskInterface();
 									}
 		                        });
 		                        setGraphic(managebtn);
@@ -375,6 +380,32 @@ public class TaskManagementForManagerController implements Initializable{
 		tmpTotalTask.setCellValueFactory(new PropertyValueFactory<StaffItem, Integer>("totalTask"));
 		tmpTaskComplete.setCellValueFactory(new PropertyValueFactory<StaffItem, Integer>("taskComplete"));
 		tmpTaskDelay.setCellValueFactory(new PropertyValueFactory<StaffItem, Integer>("taskDelay"));
+		
+		
+		tableManagementPersonnel.setRowFactory(tv ->{
+			TableRow<StaffItem> row = new TableRow<StaffItem>();
+			row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                	StaffItem rowData = row.getItem();
+                	setDisplayMode("Personal Management");                	
+            		loadPersonalItem(rowData);
+                }
+            });
+            return row;
+		});
+	}
+	
+	/**
+	 * @setRequestTableProperty() đặt thuộ tính cho các trường trong bảng @tableManagementPersonnel
+	 */
+	private void setRequestTableProperty() {
+		ttrTaskID.setCellValueFactory(new PropertyValueFactory<RequestItem, Integer>("id"));
+		ttrTitle.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("title"));
+		ttrContents.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("request"));
+		ttrTime.setCellValueFactory(new PropertyValueFactory<RequestItem, Date>("timestamp"));
+		//ttrStatus.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("status"));
+		//ttrAction.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("taskComplete"));
+		ttrFrom.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("name"));
 		
 		
 	}
@@ -414,7 +445,7 @@ public class TaskManagementForManagerController implements Initializable{
 		int countStaff = 0;
 		try {
 			while(rs.next()) {
-				StaffItem sti = new StaffItem(rs.getInt("ID"), rs.getString("First_Name")+" " + rs.getString("Last_Name"), 				rs.getString("Email"), rs.getString("Phone_Number"), rs.getInt("TotalTasks"), rs.getInt("TasksCompleted"), 				rs.getInt("TasksDelay"));
+				StaffItem sti = new StaffItem(rs.getInt("ID"), rs.getString("First_Name")+" " + rs.getString("Last_Name"), 				rs.getString("Email"), rs.getString("Phone_Number"), rs.getInt("TotalTasks"), rs.getInt("TasksCompleted"), 				rs.getInt("TasksDelay"), rs.getString("Position"));
 				staffList.add(sti);
 				countStaff++;
 			}
@@ -426,13 +457,42 @@ public class TaskManagementForManagerController implements Initializable{
 		dap.close();
 	}
 	/**
+	 * Phương thức @setRequestInterface dùng để load dữ liệu của Tab Personnel
+	 * 
+	 */
+	private void setRequestInterface() {
+		String[] dateSelected = choiceBoxDate.getValue().split(" ");
+		DAPTaskPerform dap = new DAPTaskPerform();
+		Date dateBegin = Date.valueOf(pickDate.getValue().plusDays(-1));
+		Date dateEnd = Date.valueOf(pickDate.getValue().plusDays(Integer.parseInt(dateSelected[0])+1));
+		ResultSet rs = dap.selectAllRequest(Main.userLogin.getId(), dateBegin, dateEnd);
+		requestList.clear();
+		int countRequest = 0;
+		try {
+			while(rs.next()) {
+				RequestItem rqi = new RequestItem(rs.getInt("ID"), rs.getInt("From"), rs.getString("Request"), 
+						rs.getDate("Timestamp"), rs.getInt("Seem"), rs.getString("Title"), rs.getString("First_Name")+" "+
+						rs.getString("Last_Name"));
+				System.out.println(rs.getString("Title"));
+				requestList.add(rqi);
+				countRequest++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableTaskRequires.setItems(requestList);
+
+		dap.close();
+	}
+	/**
 	 * Phương thức @setDisplayMode thiết lập on-off các Component của giao diện bao gồm:
 	 * @createTask : tạo/ edit Task
 	 * @taskRequires: Yêu cầu cháp thuận.
 	 */
 	private void setDisplayMode(String mode) {
 		homeVboxCenter.setVisible(mode.equals("All Tasks"));
-		homeVboxItems.setVisible(mode.equals("Add Task")|| mode.equals("Edit Task")||  mode.equals("Task Management"));
+		homeVboxItems.setVisible(mode.equals("Add Task")|| mode.equals("Edit Task")||  mode.equals("Task Management")
+				|| mode.equals("Personal Management"));
 		
 	}
 	
@@ -495,6 +555,18 @@ public class TaskManagementForManagerController implements Initializable{
 		}
 	}
 	
+	private void loadPersonalItem(StaffItem staffitem) {
+		homePane.getChildren().clear();
+		//homePaneTop.setPrefHeight();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/TaskManagementForStaff.fxml"));
+		try {
+			homePane.setCenter(loader.load());
+			TaskManagementForStaffController controller = loader.getController();
+			controller.setUserRetrive(staffitem);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * @setDonutChartInterface Phương thức này được sử dụng để render Biểu đồ bánh donut
@@ -511,7 +583,7 @@ public class TaskManagementForManagerController implements Initializable{
 				lbTasksMonth.setText(rs.getInt("TotalRows") + " Tasks");
 				lbTaskComplete.setText(rs.getInt("CompeledRows") + " Tasks");
 				data1 = new ChartData("Tasks Complete", rs.getInt("CompeledRows"),Color.rgb(81, 176, 157));
-				data2 = new ChartData("Tasks Doing", rs.getInt("TotalRows")- rs.getInt("CompeledRows")- 				rs.getInt("DelayedRows"),Color.rgb(67, 81, 133));
+				data2 = new ChartData("Tasks Doing", rs.getInt("TotalRows")- rs.getInt("CompeledRows") - 				rs.getInt("DelayedRows"),Color.rgb(67, 81, 133));
 				data3 = new ChartData("Tasks Delay", rs.getInt("DelayedRows"),Color.rgb(237, 187, 95));
 			}
 		} catch (SQLException e) {

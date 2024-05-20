@@ -188,7 +188,7 @@
    <bottom>
       <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="crt_TextArea" prefHeight="155.0">
+            <TextArea fx:id="crt_TextArea" prefHeight="155.0" wrapText="true">
                <VBox.margin>
                   <Insets left="50.0" right="50.0" />
                </VBox.margin>

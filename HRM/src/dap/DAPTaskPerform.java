@@ -77,6 +77,7 @@ public class DAPTaskPerform extends DAPCore {
 		return null;
 	}
 	
+	
 	/**
 	 * @selectPerson phương thức này trả về số lượng nhân sự trong phòng ban đang kiểm soát và số lượng task đang thực hiện của 
 	 * mỗi nhân sự đó
@@ -86,7 +87,7 @@ public class DAPTaskPerform extends DAPCore {
 	 */
 	public ResultSet selectPerson(String department, int id) {
 		String query = "SELECT Staff.ID, Staff.First_Name, Staff.Last_Name, Staff.Email , \r\n"
-				+ "Staff.Phone_Number, \r\n"
+				+ "Staff.Phone_Number, Staff.Position ,\r\n"
 				+ "COUNT(DISTINCT StaffTask.TaskID) AS TotalTasks,\r\n"
 				+ "SUM(CASE WHEN Task_Execution.Status = 'Complete' THEN 1 ELSE 0 END) AS TasksCompleted ,\r\n"
 				+ "SUM(CASE WHEN Task_Execution.Status = 'Delay' THEN 1 ELSE 0 END) AS TasksDelay \r\n"
@@ -96,7 +97,7 @@ public class DAPTaskPerform extends DAPCore {
 				+ "AND StaffTask.StaffID = Task_Execution.StaffID\r\n"
 				+ "WHERE Staff.Department = ? AND Staff.ID<>?\r\n"
 				+ "GROUP BY \r\n"
-				+ "Staff.ID, Staff.First_Name, Staff.Last_Name, Staff.Email , Staff.Phone_Number";
+				+ "Staff.ID, Staff.First_Name, Staff.Last_Name, Staff.Email , Staff.Phone_Number,Staff.Position ";
 		cnn = DBConnect.makeConnection(serverName, port, database, usernameServer, passwordServer);
 		try {
 			st = cnn.prepareStatement(query);
@@ -105,6 +106,37 @@ public class DAPTaskPerform extends DAPCore {
 			rs = st.executeQuery();
 			return rs;
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * @selectAllRequest phương thức này được sủ dụng để select tất cả các Request từ nhân một nhân sự dựa trên các tham số
+	 * @param staffIDTo	  : ID của Người nhận Requst
+	 * @param taskID	  : ID của Task đang thực hiện
+	 * @return giá trị trả về gồm TaskRequest.ID, TaskRequest.TaskID, TaskRequest.[From] ,TaskRequest.[To], TaskRequest.Request,
+	 *  TaskRequest.[Timestamp], TaskRequest.Seem, Staff.First_Name,Staff.Last_Name
+	 */
+	public ResultSet selectAllRequest(int staffIDTo, Date start, Date end) {
+		String query ="SELECT TaskRequest.[ID], TaskRequest.[From], TaskRequest.[Request],\r\n"
+				+ "TaskRequest.[Timestamp], TaskRequest.[Seem], Task.[Title],\r\n"
+				+ "Staff.[First_Name], Staff.[Last_Name]"
+				+ "FROM TaskRequest\r\n"
+				+ "INNER JOIN Task ON Task.ID = TaskRequest.TaskID\r\n"
+				+ "INNER JOIN Staff ON Staff.ID =TaskRequest.[From]\r\n"
+				+ "WHERE TaskRequest.[To] = ? AND TaskRequest.[Timestamp] >=? AND TaskRequest.[Timestamp] <= ?\r\n"
+				+ "ORDER BY TaskRequest.[Timestamp]";
+		cnn = DBConnect.makeConnection(serverName, port, database, usernameServer, passwordServer);
+		try {
+			st= cnn.prepareStatement(query);
+
+			st.setInt(1, staffIDTo);
+			st.setDate(2, start);
+			st.setDate(3, end);
+			rs = st.executeQuery();
+			return rs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -142,6 +174,32 @@ public class DAPTaskPerform extends DAPCore {
 		}
 		return null;
 	}
+	
+	public ResultSet selectTaskChart(int id, Date start, Date end) {
+		String query = "SELECT Task.Started_Date,\r\n"
+				+ "	COUNT( DISTINCT Task.ID ) AS TotalTask,\r\n"
+				+ " SUM( CASE WHEN Task_Execution.[Status] = 'Complete' THEN 1 ELSE 0 END ) AS CompletedTask"
+				+ "	FROM Task\r\n"
+				+ "	INNER JOIN StaffTask ON Task.ID = StaffTask.TaskID\r\n"
+				+ "	INNER JOIN Staff ON Staff.ID = StaffTask.StaffID\r\n"
+				+ "	INNER JOIN Task_Execution ON Task_Execution.TaskID= Task.ID  AND Task_Execution.StaffID = Staff.ID\r\n"
+				+ "	WHERE StaffTask.StaffID = ?  AND Task.Started_Date >=?  AND Task.Started_Date <=? \r\n"
+				+ "	GROUP BY Task.Started_Date";
+		cnn = DBConnect.makeConnection(serverName, port, database, usernameServer, passwordServer);
+		try {
+			st = cnn.prepareStatement(query);
+			st.setInt(1, id);
+			st.setDate(2, start);
+			st.setDate(3, end);
+			rs = st.executeQuery();
+			return rs;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@Override
 	public ResultSet select(String param1, String param2) {
 		return null;

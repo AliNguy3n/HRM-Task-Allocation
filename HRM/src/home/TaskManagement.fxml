@@ -176,7 +176,7 @@
    <bottom>
       <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="tmt_TextArea" prefHeight="120.0">
+            <TextArea fx:id="tmt_TextArea" prefHeight="120.0" wrapText="true">
                <VBox.margin>
                   <Insets bottom="20.0" left="50.0" right="50.0" />
                </VBox.margin>

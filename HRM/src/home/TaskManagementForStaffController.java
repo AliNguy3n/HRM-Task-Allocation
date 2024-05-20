@@ -6,13 +6,12 @@ package home;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.AreaChart;
+
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.Chart;
-import javafx.scene.chart.LineChart;
+
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ValueAxis;
+
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 
@@ -23,7 +22,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import application.Main;
 import dap.DAPTask;
@@ -62,6 +65,12 @@ import javafx.scene.control.TableRow;
 
 public class TaskManagementForStaffController implements Initializable{
 
+    @FXML
+    private Button btnBackToTasks;
+    
+    @FXML
+    private FontIcon iKonBackToTasks;
+    
     @FXML
     private Label lbNumberMess;
     
@@ -228,10 +237,11 @@ public class TaskManagementForStaffController implements Initializable{
     		setTaskInterface();
     	}
     }
-    
-    String[] date = {"7 days","14 days", "21 day", "30 days", "60 days"};
-    ObservableList<TaskItem> taskProgressList = FXCollections.observableArrayList();
-    ObservableList<TaskItem> taskCompletedList = FXCollections.observableArrayList();
+    HashMap<Date, Integer> chartValueTotal = new HashMap<Date, Integer>();
+    HashMap<Date, Integer> chartValueComplete = new HashMap<Date, Integer>();
+    private String[] date = {"7 days","14 days", "21 day", "30 days", "60 days"};
+    private  ObservableList<TaskItem> taskProgressList = FXCollections.observableArrayList();
+    private ObservableList<TaskItem> taskCompletedList = FXCollections.observableArrayList();
     int totalTask ;
     int delayTask ;
     int completeTask ;
@@ -242,7 +252,12 @@ public class TaskManagementForStaffController implements Initializable{
 	private ChartData data2 ;
 	private ChartData data3 ;		
 	
-
+	private LocalDate localDate = LocalDate.now();
+	private DateTimeFormatter myFormatLocalDate = DateTimeFormatter.ofPattern("dd-MM");
+	
+	StaffItem staffItem;
+	
+	int mode = 0;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lbUsername.setText(Main.userLogin.getFirstname()+" "+Main.userLogin.getLastname());
@@ -252,10 +267,33 @@ public class TaskManagementForStaffController implements Initializable{
 		choiceBoxDate.getItems().addAll(date);
 		pickDate.setValue(LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), 1));
 		choiceBoxDate.setValue("30 days");
+		
+		for(int i= -4; i<3; i++) {
+			chartValueTotal.put(Date.valueOf(localDate.plusDays(i)), 0);
+			chartValueComplete.put(Date.valueOf(localDate.plusDays(i)), 0);
+		}
 		setTaskInterface();
+		btnBackToTasks.setDisable(true);
+		btnBackToTasks.setVisible(false);
 		
 		
-		
+	}
+	
+	public void setUserRetrive(StaffItem staffItem) {
+		this.staffItem = staffItem;
+		lbUsername.setText(staffItem.getName());
+		lbPoisition.setText(staffItem.getPosition());
+		for(int i= -4; i<3; i++) {
+			chartValueTotal.put(Date.valueOf(localDate.plusDays(i)), 0);
+			chartValueComplete.put(Date.valueOf(localDate.plusDays(i)), 0);
+		}
+		mode = 1;
+		setTaskInterface();
+		btnAddTask.setVisible(false);
+	}
+	
+	public Button getButtonBackToTasks() {
+		return btnBackToTasks;
 	}
 	
 	private void setTaskInterface() {
@@ -269,8 +307,12 @@ public class TaskManagementForStaffController implements Initializable{
 		Date dateBegin = Date.valueOf(pickDate.getValue());
 		Date dateEnd  = Date.valueOf(pickDate.getValue().plusDays(Integer.parseInt(dateSelected[0])));
 		DAPTaskPerform dap = new DAPTaskPerform();
-		ResultSet rs = dap.selectStaffTask(Main.userLogin.getId(), dateBegin, dateEnd);
-		
+		ResultSet rs = null;
+		if(mode == 1) {
+			rs = dap.selectStaffTask(staffItem.getId(), dateBegin, dateEnd);
+		}else {
+			rs = dap.selectStaffTask(Main.userLogin.getId(), dateBegin, dateEnd);
+		}
 		try {
 			while(rs.next()) {
 				TaskItem item = new TaskItem(rs.getInt("ID"), rs.getString("Title"), rs.getString("Content"), 
@@ -293,6 +335,26 @@ public class TaskManagementForStaffController implements Initializable{
 
 			e.printStackTrace();
 		}
+		ResultSet rss =null;
+		if(mode ==1 ) {
+			rss = dap.selectTaskChart(staffItem.getId(), Date.valueOf(localDate.plusDays(-4)) ,
+					Date.valueOf(localDate.plusDays(2)));
+		}else {
+			rss = dap.selectTaskChart(Main.userLogin.getId(), Date.valueOf(localDate.plusDays(-4)) ,
+					Date.valueOf(localDate.plusDays(2)));
+		}
+		
+		
+		try {
+			while(rss.next()) {
+				chartValueTotal.replace(rss.getDate("Started_Date"),rss.getInt("TotalTask")) ;
+				chartValueComplete.replace(rss.getDate("Started_Date"),rss.getInt("CompletedTask")) ;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		tableTasksDoing.getItems().clear();
 		tableCompleted.getItems().clear();
 		tableTasksDoing.getItems().addAll(taskProgressList);
@@ -303,6 +365,8 @@ public class TaskManagementForStaffController implements Initializable{
 		lbTasksCompleted.setText(completeTask+" Tasks");
 		
 		setChartInterface();
+		
+		dap.close();
 	}
 	private void setProgressTaskInterface() {
 	    tsDoingContents.setCellValueFactory(new PropertyValueFactory<TaskItem, String>("content"));
@@ -440,13 +504,13 @@ public class TaskManagementForStaffController implements Initializable{
 		}
 	}
 	/**
-	 * @setDonutChartInterface Phương thức này được sử dụng để render Biểu đồ bánh donut
+	 * @setDonutChartInterface Phương thức này được sử dụng để render Biểu đồ bánh donut và biểu đồ cột
 	 * Biểu đồ chứa thông tin hiển thị số lượng @taskComplete, @taskDelay, @TaskDoing
 	 */
 
 	@SuppressWarnings("unchecked")
 	private void setChartInterface() {		
-
+		
 
 		data1 = new ChartData("Tasks Complete", completeTask ,Color.rgb(81, 176, 157));
 		data2 = new ChartData("Tasks Doing", doingTask ,Color.rgb(67, 81, 133));
@@ -465,27 +529,25 @@ public class TaskManagementForStaffController implements Initializable{
                 )
                 .build();
 		
+		
+		
 		// Dữ liệu cho tập số liệu 1
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Series 1");
-        series1.getData().add(new XYChart.Data<>("Item 1", 20));
-        series1.getData().add(new XYChart.Data<>("Item 2", 30));
-        series1.getData().add(new XYChart.Data<>("Item 3", 10));
-        series1.getData().add(new XYChart.Data<>("Item 4", 15));
-        series1.getData().add(new XYChart.Data<>("Item 5", 13));
-        series1.getData().add(new XYChart.Data<>("Item 6", 19));
-        series1.getData().add(new XYChart.Data<>("Item 7", 10));
+        series1.setName("Tasks Assigned");
+		for(int i= -4; i<3; i++) {
+			series1.getData().add(new XYChart.Data<>(myFormatLocalDate.format(localDate.plusDays(i)),
+	        		chartValueTotal.get(Date.valueOf(localDate.plusDays(i)))));
+		}
+        
+
 
         // Dữ liệu cho tập số liệu 2
         XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-        series2.setName("Series 2");
-        series2.getData().add(new XYChart.Data<>("Item 1", 10));
-        series2.getData().add(new XYChart.Data<>("Item 2", 20));
-        series2.getData().add(new XYChart.Data<>("Item 3", 30));
-        series2.getData().add(new XYChart.Data<>("Item 4", 20));
-        series2.getData().add(new XYChart.Data<>("Item 5", 10));
-        series2.getData().add(new XYChart.Data<>("Item 6", 15));
-        series2.getData().add(new XYChart.Data<>("Item 7", 20));
+        series2.setName("Tasks Completed");
+        for(int i= -4; i<3; i++) {
+			series2.getData().add(new XYChart.Data<>(myFormatLocalDate.format(localDate.plusDays(i)),
+	        		chartValueComplete.get(Date.valueOf(localDate.plusDays(i)))));
+		}
 
         // Khởi tạo trục x và trục y
         CategoryAxis xAxis = new CategoryAxis();

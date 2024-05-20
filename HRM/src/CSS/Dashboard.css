@@ -19,3 +19,12 @@
 	-fx-text-fill:#FAFAFA;
 	-fx-fill: #FAFAFA;
 } 
+#btnLogout{
+	-fx-background-color: transparent;
+	-fx-text-fill:#616161;
+	-fx-border-color: #BDBDBD;
+	-fx-border-width: 1 0 0 0 ;
+}
+#iKonLogout{
+	-fx-fill:#616161;
+}

@@ -298,6 +298,7 @@ public class CreateTaskController implements Initializable {
 			popOver.setOnHidden(e -> {
 				String[] selected = controller.getStaffAddValue();
 				// Xử lý giá trị đã lấy được
+				
 				if (selected != null) {
 					for (String string : selected) {
 						selectedItems.add(string);
@@ -363,10 +364,12 @@ public class CreateTaskController implements Initializable {
 				alert.show();
 				
 				if(alert.isShowing()) {
-					System.out.println("Da show");
-					crt_btnCreateTask.setText("Created");
-					crt_btnCreateTask.setDisable(true);
-					crt_btnCancel.setText("Back To Home");
+					clearFields();
+					selectedItems.clear();
+					crt_lbTitleTo.getChildren().clear();
+					//crt_btnCreateTask.setText("Created");
+					//crt_btnCreateTask.setDisable(true);
+					//crt_btnCancel.setText("Back To Home");
 				}
 			}
 			dap.close();
@@ -379,7 +382,7 @@ public class CreateTaskController implements Initializable {
 					formatTime(crt_PickHoursFinish.getText(), crt_PickMinutesFinish.getText()), crt_TextArea.getText());
 			
 			dap.deleteStaffTask(taskItem.getId());
-			
+			dap.deleteTaskExecution(taskItem.getId());
 			if (selectedItems.size() !=0) {
 				for (String str : selectedItems) {
 					String[] st = str.split("[:-]");
@@ -463,14 +466,21 @@ public class CreateTaskController implements Initializable {
 			check = false;
 		}
 		if (crt_PickMinutesFinish.getText().isEmpty()) {
-			checkValidationMessage(crt_PickHoursFinish, "Please enter the Finish minute of the task");
+			checkValidationMessage(crt_PickMinutesFinish, "Please enter the Finish minute of the task");
 			check = false;
 		}
 		if (crt_TextArea.getText().isEmpty()) {
 			checkValidationMessage(crt_TextArea, "The Contents must not be left EMPTY");
 			check = false;
 		}
-		
+		if (crt_PickFinishDate.getValue().isEqual(crt_PickStartDate.getValue())) {
+			int hourss = Integer.parseInt(crt_PickHoursFinish.getText()) - Integer.parseInt(crt_PickHoursStart.getText());
+			if(hourss <1) {
+				checkValidationMessage(crt_PickHoursFinish, "The Finish hours of the task invalid");
+				check = false;
+			}
+			
+		}
 		return check;
 	}
 
@@ -493,6 +503,15 @@ public class CreateTaskController implements Initializable {
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
-
+	}
+	private void clearFields() {
+		crt_txtTitle.clear();
+		//crt_PickStartDate;
+		crt_PickHoursStart.clear();
+		crt_PickMinutesStart.clear();
+		//crt_PickFinishDate.clear();
+		crt_PickHoursFinish.clear();
+		crt_PickMinutesFinish.clear();
+		crt_TextArea.clear();
 	}
 }

@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,12 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import application.Main;
 
 public class DashBoardController implements Initializable{
-
+    @FXML
+    private Button btnLogout;
+    
+    @FXML
+    private FontIcon iKonLogout;
+    
     @FXML
     private ToggleGroup NavBar;
 
@@ -113,5 +119,8 @@ public class DashBoardController implements Initializable{
     		}
 		}	
 		}
+	}
+	public Button getButtonLogout() {
+		return btnLogout;
 	}
 }

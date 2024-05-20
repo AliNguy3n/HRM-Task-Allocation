@@ -209,15 +209,23 @@ public class TaskReportController implements Initializable{
     @FXML
     void handleTaskReporting(ActionEvent event) {
     	if(event.getSource() == btnSendRequest) {
-    		if(sendRequest() !=0) {
-    			trp_TitledRequesting_txt.clear();
-    			loadRequest();
-    		}
+    		if(btnAcceptingTask.getText().equals("Accepted")) {
+    			if(sendRequest() !=0) {
+        			trp_TitledRequesting_txt.clear();
+        			loadRequest();
+        		}
+    		}else {
+    			AlertAccepted();
+    		}    		
     	}
     	else if(event.getSource() == btnSendReport) {
-    		if(sendReport() !=0) {
-    			trp_TitledReporting_txtFinal.setText(trp_TitledReporting_txtInput.getText());
-    			trp_TitledReporting_txtInput.clear();
+    		if(btnAcceptingTask.getText().equals("Accepted")) {
+        		if(sendReport() !=0) {
+        			trp_TitledReporting_txtFinal.setText(trp_TitledReporting_txtInput.getText());
+        			trp_TitledReporting_txtInput.clear();
+        		}
+    		}else {
+    			AlertAccepted();
     		}
     	}
     	else if(event.getSource() == btnAcceptingTask) {
@@ -334,7 +342,13 @@ public class TaskReportController implements Initializable{
 	private int sendRequest() {
 		trp_TitledRequesting_txt.getText();
 		DAPTaskReport dap = new DAPTaskReport();
-		int i = dap.insertRequest(Main.userLogin.getId(), staffID, taskID, trp_TitledRequesting_txt.getText());
+		int i =0;
+		if(Main.userLogin.getPermission() ==3) {
+			i = dap.insertRequest(Main.userLogin.getId(), assignedby, taskID, trp_TitledRequesting_txt.getText());
+		}else {
+			i = dap.insertRequest(Main.userLogin.getId(), staffID, taskID, trp_TitledRequesting_txt.getText());
+		}
+		
 		dap.closeCnn();
 		return i;
 	}
@@ -434,6 +448,13 @@ public class TaskReportController implements Initializable{
                 .build();
         vBoxRadarChart.getChildren().clear();
 		vBoxRadarChart.getChildren().add(radarChart);
+	}
+	
+	private void AlertAccepted() {
+		Alert newAlert = new Alert(AlertType.ERROR);
+		newAlert.setTitle("Something went wrong");
+		newAlert.setHeaderText("You need to agree to perform the task before sending a request or submitting a report.");
+		newAlert.show();
 	}
 }
 

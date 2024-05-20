@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -67,6 +68,17 @@
                   <FontIcon fx:id="iKonSettings" iconLiteral="fltfmz-settings-20" iconSize="24" />
                </graphic>
             </ToggleButton>
+            <Button fx:id="btnLogout" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefWidth="200.0" text="Logout">
+               <graphic>
+                  <FontIcon fx:id="iKonLogout" iconLiteral="fltfmz-sign-out-20" iconSize="26" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="8.0" />
+               </VBox.margin>
+            </Button>
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="3.0" top="6.0" />
@@ -74,7 +86,7 @@
       </VBox>
    </left>
    <center>
-      <BorderPane fx:id="dashboardView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
+      <BorderPane fx:id="dashboardView" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets bottom="6.0" left="3.0" right="6.0" top="6.0" />
          </BorderPane.margin></BorderPane>
