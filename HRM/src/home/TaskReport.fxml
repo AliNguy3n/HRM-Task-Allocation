@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXSlider?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="taskReportPane" prefWidth="700.0" stylesheets="@../CSS/TaskReport.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.TaskReportController">
+   <top>
+      <HBox fx:id="taskReportTopPane" alignment="CENTER_LEFT" prefHeight="40.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="trp_lbTitleTop" text="The Report Of : ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="trp_lbTitleUser" text="User">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <Accordion fx:id="trp_AccordionPane" BorderPane.alignment="TOP_CENTER">
+        <panes>
+          <TitledPane fx:id="trp_TitledAccepting" alignment="BASELINE_LEFT" text="Accepting task assignment">
+            <content>
+              <AnchorPane fx:id="trp_TitledAccepting_Pane">
+                     <children>
+                        <Label fx:id="trp_TitledAccepting_lb" layoutX="25.0" layoutY="4.0" text="Accepting Task:  " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0" />
+                        <Label fx:id="trp_TitledAcceptingContent" layoutX="22.0" layoutY="49.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0" />
+                        <ToggleButton fx:id="btnAcceptingTask" layoutX="119.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleTaskReporting" text="Click to Accepting Task!" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="4.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="trp_TitledRequesting" alignment="BASELINE_LEFT" text="Requesting necessary resources (if any)">
+            <content>
+              <AnchorPane fx:id="trp_TitledRequesting_Pane">
+                     <children>
+                        <TextArea fx:id="trp_TitledRequesting_txt" layoutX="20.0" layoutY="78.0" prefHeight="50.0" prefWidth="556.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                        <VBox fx:id="trp_TitledRequesting_vBox" maxWidth="300.0" spacing="4.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox fx:id="trp_TitledRequesting_hBox" alignment="TOP_RIGHT" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnSendRequest" layoutX="538.0" layoutY="106.0" mnemonicParsing="false" onAction="#handleTaskReporting" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <graphic>
+                              <FontIcon fx:id="trp_iKonSend" iconLiteral="fltfmz-send-20" iconSize="20" />
+                           </graphic></Button>
+                        <Label fx:id="trp_TitledRequesting_lb" layoutX="33.0" layoutY="112.0" text="Your Requesting:" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="trp_TitledReporting" alignment="BASELINE_LEFT" text="Task reporting">
+            <content>
+              <AnchorPane fx:id="trp_TitledReporting_Pane">
+                     <children>
+                        <TextArea fx:id="trp_TitledReporting_txtInput" prefHeight="50.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                        <Button fx:id="btnSendReport" mnemonicParsing="false" onAction="#handleTaskReporting" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <graphic>
+                              <FontIcon fx:id="trp_iKonSend1" iconLiteral="fltfmz-send-20" iconSize="20" />
+                           </graphic>
+                        </Button>
+                        <Label fx:id="trp_TitledReporting_lbInput" layoutX="32.0" layoutY="103.0" text="Employee Reporting:" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="25.0" />
+                        <TextArea fx:id="trp_TitledReporting_txtFinal" layoutX="20.0" layoutY="23.0" prefHeight="50.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                        <Label fx:id="trp_TitledReporting_lbTitle" layoutX="29.0" layoutY="21.0" text="Final Reportting:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
+            </content>
+          </TitledPane>
+            <TitledPane fx:id="trp_TitledEvaluation" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="60.0" text="Task assignee's evaluation">
+               <content>
+                  <AnchorPane fx:id="trp_TitledEvaluationPane">
+                     <children>
+                        <Label fx:id="trp_TitledEvaluation_lbDeadline" layoutX="26.0" layoutY="105.0" text="Deadline Complete: " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="85.0" />
+                        <Label fx:id="trp_TitledEvaluation_lbQuality" layoutX="25.0" layoutY="134.0" text="Task Quality: " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="125.0" />
+                        <Label fx:id="trp_TitledEvaluation_lbCooperation" layoutX="25.0" layoutY="161.0" text="Cooperation" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="165.0" />
+                        <Label fx:id="trp_TitledEvaluation_lbProactivity" layoutX="30.0" layoutY="194.0" text="Proactivity" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="205.0" />
+                        <Label fx:id="trp_TitledEvaluation_lbCreation" layoutX="35.0" layoutY="229.0" text="Creation" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="245.0" />
+                        <Button fx:id="btnSubmitEvaluation" layoutX="214.0" layoutY="276.0" mnemonicParsing="false" onAction="#handleTaskReporting" text="Submit Evaluation">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <VBox fx:id="vBoxRadarChart" layoutX="455.0" layoutY="82.0" prefHeight="220.0" prefWidth="220.0" AnchorPane.leftAnchor="460.0" />
+                        <TextArea fx:id="trp_TitledEvaluation_Comment" layoutX="35.0" layoutY="32.0" prefHeight="50.0" prefWidth="556.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                        <Label fx:id="trp_TitledRequesting_lbComment" layoutX="46.0" layoutY="24.0" text="Comments:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0" />
+                        <MFXSlider fx:id="sliderCooperation" layoutX="155.0" layoutY="100.0" prefWidth="260.0" unitIncrement="5.0" />
+                        <MFXSlider fx:id="slideQuality" layoutX="155.0" layoutY="139.0" prefWidth="260.0" unitIncrement="5.0" />
+                        <MFXSlider fx:id="sliderDealine" layoutX="155.0" layoutY="180.0" prefWidth="260.0" unitIncrement="5.0" />
+                        <MFXSlider fx:id="sliderProactivity" layoutX="155.0" layoutY="220.0" prefWidth="260.0" unitIncrement="5.0" />
+                        <MFXSlider fx:id="sliderCreation" layoutX="155.0" layoutY="260.0" prefWidth="260.0" unitIncrement="5.0" />
+                     </children></AnchorPane>
+               </content>
+            </TitledPane>
+        </panes>
+         <BorderPane.margin>
+            <Insets bottom="3.0" top="3.0" />
+         </BorderPane.margin>
+      </Accordion>
+   </center>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</BorderPane>

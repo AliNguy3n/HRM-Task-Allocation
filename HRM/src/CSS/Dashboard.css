@@ -9,34 +9,13 @@
 	-fx-border-width: 0 0 1 0;
 	-fx-border-color: #D1D5DB;
 }
-/*#btnHome, #btnManage, #btnAccounts, #btnSettings,#btnHome #iKonHome, #btnManage #iKonManage, #btnAccounts #iKonAccounts, #btnSettings #iKonSettings{*/
-/*	-fx-background-color: transparent;*/
-/*	-fx-text-fill:#616161;*/
-/*	-fx-fill: #616161;*/
-/*}*/
-/*#btnHome:selected, #btnManage:selected, #btnAccounts:selected, #btnSettings:selected,#btnHome:selected #iKonHome, #btnManage:selected #iKonManage, #btnAccounts:selected #iKonAccounts, #btnSettings:selected #iKonSettings{*/
-/*	-fx-background-color: #6F65E7;*/
-/*	-fx-text-fill:#FAFAFA;*/
-/*	-fx-fill: #FAFAFA;*/
-/*}*/
-
-#navDashBoardLeft ToggleButton{
+#btnHome, #btnManage, #btnAccounts, #btnSettings,#btnHome #iKonHome, #btnManage #iKonManage, #btnAccounts #iKonAccounts, #btnSettings #iKonSettings{
 	-fx-background-color: transparent;
 	-fx-text-fill:#616161;
 	-fx-fill: #616161;
-}
-#navDashBoardLeft ToggleButton:selected{
+} 
+#btnHome:selected, #btnManage:selected, #btnAccounts:selected, #btnSettings:selected,#btnHome:selected #iKonHome, #btnManage:selected #iKonManage, #btnAccounts:selected #iKonAccounts, #btnSettings:selected #iKonSettings{
 	-fx-background-color: #6F65E7;
 	-fx-text-fill:#FAFAFA;
 	-fx-fill: #FAFAFA;
-}
-
-#navDashBoardLeft FontIcon{
-	-fx-text-fill:#616161;
-	-fx-fill: #616161;
-}
-
-#navDashBoardLeft ToggleButton:selected FontIcon{
-	-fx-text-fill:#FAFAFA;
-	-fx-fill: #FAFAFA;
-}
+} 

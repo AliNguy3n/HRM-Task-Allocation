@@ -102,11 +102,12 @@
 	-fx-pref-height: 40px;
 	-fx-table-cell-border-color: transparent;
 	-fx-font-size: 14;
+	-fx-padding: 6 0 5 0;
+	
 }
 #tableManagementPersonnel .column-header, #tableManagementTask .column-header, #tableTaskRequires .column-header{
 	-fx-background-color: #F4F4F9;
 	-fx-pref-height: 40px;
-
 }
 #tableManagementPersonnel .column-header .label, #tableManagementTask .column-header .label, #tableTaskRequires .column-header .label{
 	-fx-font-size: 14;
@@ -124,7 +125,7 @@
 }
     
 #ttrAction , #ttrContents , #ttrFrom , #ttrStatus , #ttrTaskID , #ttrTime , #ttrTitle{
-	
+	-fx-alignment: center ;
 }
 
     

@@ -16,7 +16,7 @@ public class UserLogin {
 	String department;
 	String position;
 	String username;
-	String permission;
+	int permission;
 	String Status;
 	float salary;
 	String password;
@@ -72,10 +72,10 @@ public class UserLogin {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPermission() {
+	public int getPermission() {
 		return permission;
 	}
-	public void setPermission(String permission) {
+	public void setPermission(int permission) {
 		this.permission = permission;
 	}
 	public String getStatus() {

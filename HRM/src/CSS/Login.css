@@ -47,3 +47,8 @@
 #lbTitleLogin{
 	-fx-text-fill: #303F9F;
 }
+
+#btnForgot{
+	-fx-background-color: transparent;
+	-fx-text-fill:#6F65E7;
+}

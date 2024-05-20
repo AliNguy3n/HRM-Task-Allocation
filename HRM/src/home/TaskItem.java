@@ -15,8 +15,10 @@ public class TaskItem {
 	Time startTime;
 	Date finishDate;
 	Time finishTime;
+	int assignedby;
+	String status;
 	public TaskItem(int id, String title, String content, int to, Date startDate, Time startTime, Date finishDate,
-			Time finishTime) {
+			Time finishTime, int assignedby, String status) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -26,6 +28,8 @@ public class TaskItem {
 		this.startTime = startTime;
 		this.finishDate = finishDate;
 		this.finishTime = finishTime;
+		this.assignedby = assignedby;
+		this.status = status;
 	}
 	public int getId() {
 		return id;
@@ -74,6 +78,18 @@ public class TaskItem {
 	}
 	public void setFinishTime(Time finishTime) {
 		this.finishTime = finishTime;
+	}
+	public int getAssignedby() {
+		return assignedby;
+	}
+	public void setAssignedby(int assignedby) {
+		this.assignedby = assignedby;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

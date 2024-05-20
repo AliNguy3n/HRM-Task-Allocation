@@ -60,6 +60,18 @@
 			<artifactId>controlsfx</artifactId>
 			<version>11.2.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/eu.hansolo/tilesfx -->
+		<dependency>
+			<groupId>eu.hansolo</groupId>
+			<artifactId>tilesfx</artifactId>
+			<version>21.0.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.github.palexdev/materialfx -->
+		<dependency>
+			<groupId>io.github.palexdev</groupId>
+			<artifactId>materialfx</artifactId>
+			<version>11.17.0</version>
+		</dependency>
 
 
 	</dependencies>

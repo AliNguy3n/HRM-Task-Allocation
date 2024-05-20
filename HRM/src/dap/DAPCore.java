@@ -43,7 +43,7 @@ abstract class DAPCore {
 	/**
 	 *  Phương thức @delete trả về kết quả @Integer là số hàng sau khi thực thi 
 	 */
-	public abstract int delete();
+	public abstract int delete(int param);
 	
 	/**
 	 *  Phương thức @close đóng kết nối

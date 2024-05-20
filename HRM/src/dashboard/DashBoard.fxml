@@ -1,94 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="dashBoardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200" stylesheets="@../CSS/Dashboard.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashBoardController">
+<BorderPane fx:id="dashBoardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../CSS/Dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashBoardController">
    <left>
       <VBox fx:id="navDashBoardLeft" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <HBox fx:id="paneTitleNav" alignment="CENTER" prefHeight="60.0">
-            <ImageView fx:id="imageLogo" fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/LogoIconOnly.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="imageTitle" fitHeight="60.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/LogoTitle.png" />
-               </image>
-            </ImageView>
-         </HBox>
-         <ToggleButton fx:id="btnHome" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Home">
-            <font>
-               <Font name="Roboto Bold" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon fx:id="iKonHome" iconLiteral="fltfal-home-20" iconSize="24" />
-            </graphic>
-            <toggleGroup>
-               <ToggleGroup fx:id="NavBar" />
-            </toggleGroup>
-         </ToggleButton>
-         <ToggleButton fx:id="btnManage" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Manage" toggleGroup="$NavBar">
-            <font>
-               <Font name="Roboto Bold" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon fx:id="iKonManage" iconLiteral="fltfal-data-pie-20" iconSize="24" />
-            </graphic>
-         </ToggleButton>
-<!--         <ToggleButton fx:id="btnAccounts" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Accounts" toggleGroup="$NavBar">-->
-<!--            <font>-->
-<!--               <Font name="Roboto Bold" size="16.0" />-->
-<!--            </font>-->
-<!--            <graphic>-->
-<!--               <FontIcon fx:id="iKonbtnAccounts" iconLiteral="fltfmz-person-20" iconSize="24" />-->
-<!--            </graphic>-->
-<!--         </ToggleButton>-->
-         <ToggleButton fx:id="btnAccount" alignment="CENTER_LEFT" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Account" toggleGroup="$NavBar">>
-            <toggleGroup>
-               <ToggleGroup fx:id="NavBar1" />
-            </toggleGroup>
-            <font>
-               <Font name="Roboto Bold" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon fx:id="iKonbtnAccounts1" iconLiteral="fltfmz-person-20" iconSize="24" />
-            </graphic>
-         </ToggleButton>
-         <ToggleButton fx:id="btnStaffList" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="StaffList" toggleGroup="$NavBar">
-            <font>
-               <Font name="Roboto Bold" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon fx:id="iKonAccounts2" iconLiteral="fltfmz-person-20" iconSize="24" />
-            </graphic>
-         </ToggleButton>
-         <ToggleButton fx:id="btnSettings" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Settings" toggleGroup="$NavBar">
-            <font>
-               <Font name="Roboto Bold" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon fx:id="iKonSettings" iconLiteral="fltfmz-settings-20" iconSize="24" />
-            </graphic>
-         </ToggleButton>
-<!--         <ToggleButton fx:id="btnAccount" alignment="CENTER_LEFT" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Account">-->
-<!--            <toggleGroup>-->
-<!--               <ToggleGroup fx:id="NavBar1" />-->
-<!--            </toggleGroup>-->
-<!--            <font>-->
-<!--               <Font name="Roboto Bold" size="16.0" />-->
-<!--            </font>-->
-<!--            <graphic>-->
-<!--               <FontIcon fx:id="iKonbtnAccounts1" iconLiteral="fltfmz-person-20" iconSize="24" />-->
-<!--            </graphic>-->
-<!--         </ToggleButton>-->
+         <children>
+            <HBox fx:id="paneTitleNav" alignment="CENTER" prefHeight="60.0">
+               <children>
+                  <ImageView fx:id="imageLogo" fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/LogoIconOnly.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageTitle" fitHeight="60.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/LogoTitle.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <ToggleButton fx:id="btnHome" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Home">
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="iKonHome" iconLiteral="fltfal-home-20" iconSize="24" />
+               </graphic>
+               <toggleGroup>
+                  <ToggleGroup fx:id="NavBar" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="btnManage" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Manage" toggleGroup="$NavBar">
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="iKonManage" iconLiteral="fltfal-data-pie-20" iconSize="24" />
+               </graphic>
+            </ToggleButton>
+            <ToggleButton fx:id="btnAccounts" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Accounts" toggleGroup="$NavBar">
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="iKonAccounts" iconLiteral="fltfmz-person-20" iconSize="24" />
+               </graphic>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="btnSettings" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Settings" toggleGroup="$NavBar">
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="iKonSettings" iconLiteral="fltfmz-settings-20" iconSize="24" />
+               </graphic>
+            </ToggleButton>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="3.0" top="6.0" />
+         </BorderPane.margin>
       </VBox>
    </left>
    <center>
-      <BorderPane fx:id="dashboardView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <BorderPane fx:id="dashboardView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="3.0" right="6.0" top="6.0" />
+         </BorderPane.margin></BorderPane>
    </center>
 </BorderPane>

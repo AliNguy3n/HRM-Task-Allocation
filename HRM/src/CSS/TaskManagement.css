@@ -1,0 +1,122 @@
+
+
+#TaskManagementPane{
+	-fx-background-radius: 7px;
+	-fx-background-color: #FFFFFF;
+}
+
+
+#tmt_GridPane{
+	
+}
+
+
+
+#tmt_IkonContents, #tmt_IkonFinish, #tmt_IkonFrom, #tmt_IkonStart, #tmt_IkonTitle{
+	-fx-fill: #565656;
+}
+#tmt_IkonClearStaff{
+	-fx-fill:#BE123C;
+}
+#tmt_lbTitleTo .label{
+	-fx-font-size: 14;
+	
+}
+
+#tmt_PaneTop{
+	-fx-background-color: #061121;
+	-fx-background-radius: 7px 7px 0 0;
+}
+
+
+#tmt_PickFinishDate , #tmt_PickStartDate{
+	-fx-background-color: #e9e9e9
+	
+}
+
+#tmt_PickFinishDate .arrow-button, #tmt_PickStartDate .arrow-button{
+	-fx-background-color: #e8ebee;
+}
+
+#tmt_PickFinishDate .text-field, #tmt_PickStartDate .text-field{
+	-fx-background-color: #e8ebee;
+	
+}
+
+#tmt_PickFinishTime, #tmt_PickStartTime{
+	-fx-background-color: #e8ebee;
+	-fx-background-radius: 5px;
+}
+
+
+#tmt_PickHoursStart, #tmt_PickMinutesStart, #tmt_PickHoursFinish, #tmt_PickMinutesFinish{
+	-fx-background-color: #e8ebee;
+}
+
+
+#iKonClockStart, #iKonClockFinish{
+	-fx-fill: #565656;
+}
+
+#tmt_TextArea{
+	-fx-background-color: #e9e9e9;
+	-fx-background-radius: 5px;
+}
+#tmt_TextArea .content{
+	-fx-background-color: transparent
+
+}
+
+#tmt_bottomPane{
+	
+}
+
+
+#tmt_btnAddStaff ,#tmt_btnClearStaff{
+	-fx-background-color: transparent;
+}
+#tmt_btnAddStaff:hover{
+	-fx-background-color: #BBF7D0;
+	-fx-background-radius: 7px;
+}
+#tmt_IkonAddStaff{
+	-fx-fill:#166534
+}
+
+
+
+#tmt_btnCancel{
+	-fx-background-color: transparent;
+	-fx-fill: #e9e9e9;
+	-fx-background-radius: 5px;
+}
+
+#tmt_btnCancel:hover{
+	-fx-background-color: #424242;
+	-fx-fill: #e9e9e9;
+	-fx-background-radius: 5px;
+}
+
+#tmt_IkonBackHome{
+	-fx-fill: #e9e9e9;
+}
+
+#tmt_btnCreateTask{
+	-fx-background-color: #BBF7D0;
+	-fx-text-fill:#166534;
+	-fx-background-radius: 5px;
+}
+
+
+#tmt_lbContents, #tmt_lbTo, #tmt_lbFrom, #tmt_lbStart, #tmt_lbTitleFrom{
+	-fx-text-fill: #565656;
+
+}
+
+#tmt_lbTopTitle{
+	-fx-text-fill: #e9e9e9;
+}
+
+#tmt_txtTitle{
+	-fx-background-color: transparent;
+}

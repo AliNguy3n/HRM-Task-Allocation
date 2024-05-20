@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,26 +16,12 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="createTaskPane" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../CSS/CreateTask.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.CreateTaskController">
-   <top>
-      <VBox fx:id="crt_PaneTop" alignment="CENTER_LEFT" prefHeight="40.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="crt_lbTopTitle" text="Create Task" textFill="#166534">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="30.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-   </top>
+<BorderPane fx:id="TaskManagementPane" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../CSS/TaskManagement.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.TaskManagementController">
    <center>
-      <GridPane fx:id="crt_GridPane" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="50.0" />
-          <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="80.0" />
+      <GridPane fx:id="tmt_GridPane" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="50.0" />
+            <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="80.0" />
             <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="50.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="200.0" />
             <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="50.0" />
@@ -43,16 +30,16 @@
             <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="50.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
             <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" prefWidth="50.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="56.0" vgrow="NEVER" />
-          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="36.0" vgrow="NEVER" />
-          <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="36.0" vgrow="NEVER" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="56.0" vgrow="NEVER" />
             <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="36.0" vgrow="NEVER" />
-        </rowConstraints>
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="36.0" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="36.0" vgrow="NEVER" />
+         </rowConstraints>
          <children>
-            <FontIcon fx:id="crt_IkonTitle" iconLiteral="fltfal-drafts-20" iconSize="24" GridPane.halignment="RIGHT" />
-            <Label fx:id="crt_lbFrom" text="From:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <FontIcon fx:id="tmt_IkonTitle" iconLiteral="fltfal-drafts-20" iconSize="24" GridPane.halignment="RIGHT" />
+            <Label fx:id="tmt_lbFrom" text="From:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -60,7 +47,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="crt_lbTo" text="To:" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Label fx:id="tmt_lbTo" text="To:" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -68,19 +55,20 @@
                   <Insets left="3.0" />
                </GridPane.margin>
             </Label>
-            <FontIcon fx:id="crt_IkonFrom" iconLiteral="fltfmz-person-arrow-right-20" iconSize="24" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label fx:id="crt_lbTitleFrom" text="Boss" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <FontIcon fx:id="tmt_IkonFrom" iconLiteral="fltfmz-person-arrow-right-20" iconSize="24" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="tmt_lbTitleFrom" text="Boss" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <FontIcon fx:id="crt_IkonStart" iconLiteral="fltfal-calendar-clock-20" iconSize="24" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <FontIcon fx:id="crt_IkonFinish" iconLiteral="fltfal-calendar-clock-20" iconSize="24" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <FontIcon fx:id="tmt_IkonStart" iconLiteral="fltfal-calendar-clock-20" iconSize="24" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <FontIcon fx:id="tmt_IkonFinish" iconLiteral="fltfal-calendar-clock-20" iconSize="24" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="6.0" />
-               </GridPane.margin></FontIcon>
-            <FontIcon fx:id="crt_IkonContents" iconLiteral="fltfal-document-edit-20" iconSize="24" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Label fx:id="crt_lbStart" text="Start:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               </GridPane.margin>
+            </FontIcon>
+            <FontIcon fx:id="tmt_IkonContents" iconLiteral="fltfal-document-edit-20" iconSize="24" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label fx:id="tmt_lbStart" text="Start:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -88,7 +76,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="crt_lbStart" text="Finish:" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <Label fx:id="tmt_lbStart" text="Finish:" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -96,7 +84,7 @@
                   <Insets left="3.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="crt_lbContents" text="Contents:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="tmt_lbContents" text="Contents:" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -104,26 +92,26 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Label>
-            <HBox fx:id="crt_lbTitleTo" alignment="CENTER_LEFT" prefHeight="36.0" GridPane.columnIndex="6" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-            <Button fx:id="crt_btnAddStaff" alignment="CENTER" mnemonicParsing="false" onAction="#hanleActionCreateTask" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <HBox fx:id="tmt_lbTitleTo" alignment="CENTER_LEFT" prefHeight="36.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+            <Button fx:id="tmt_btnAddStaff" alignment="CENTER" mnemonicParsing="false" onAction="#hanleActionCreateTask" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <graphic>
-                  <FontIcon fx:id="crt_IkonAddStaff" iconLiteral="fltfmz-person-add-20" iconSize="24" />
+                  <FontIcon fx:id="tmt_IkonAddStaff" iconLiteral="fltfmz-person-add-20" iconSize="24" />
                </graphic>
             </Button>
-            <TextField fx:id="crt_txtTitle" prefHeight="25.0" prefWidth="400.0" promptText="Title" GridPane.columnIndex="1" GridPane.columnSpan="8">
+            <TextField fx:id="tmt_txtTitle" prefHeight="25.0" prefWidth="400.0" promptText="Title" GridPane.columnIndex="1" GridPane.columnSpan="4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </TextField>
             <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="100.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <children>
-                  <DatePicker fx:id="crt_PickStartDate" prefHeight="25.0" prefWidth="99.0" />
-                  <HBox fx:id="crt_PickStartTime" alignment="CENTER" prefHeight="25.0" prefWidth="80.0">
+                  <DatePicker fx:id="tmt_PickStartDate" prefHeight="25.0" prefWidth="99.0" />
+                  <HBox fx:id="tmt_PickStartTime" alignment="CENTER" prefHeight="25.0" prefWidth="80.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                      <children>
-                        <TextField fx:id="crt_PickHoursStart" prefHeight="25.0" promptText="00">
+                        <TextField fx:id="tmt_PickHoursStart" prefHeight="25.0" promptText="00">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -132,7 +120,7 @@
                            </HBox.margin>
                         </TextField>
                         <Label alignment="CENTER" contentDisplay="CENTER" text=":" textAlignment="CENTER" />
-                        <TextField fx:id="crt_PickMinutesStart" promptText="00">
+                        <TextField fx:id="tmt_PickMinutesStart" promptText="00">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -148,10 +136,10 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="140.0" layoutY="94.0" prefHeight="100.0" GridPane.columnIndex="6" GridPane.columnSpan="3" GridPane.rowIndex="2">
                <children>
-                  <DatePicker fx:id="crt_PickFinishDate" prefHeight="25.0" prefWidth="99.0" />
-                  <HBox fx:id="crt_PickFinishTime" alignment="CENTER" prefHeight="25.0" prefWidth="80.0">
+                  <DatePicker fx:id="tmt_PickFinishDate" prefHeight="25.0" prefWidth="99.0" />
+                  <HBox fx:id="tmt_PickFinishTime" alignment="CENTER" prefHeight="25.0" prefWidth="80.0">
                      <children>
-                        <TextField fx:id="crt_PickHoursFinish" promptText="00">
+                        <TextField fx:id="tmt_PickHoursFinish" promptText="00">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -160,7 +148,7 @@
                            </HBox.margin>
                         </TextField>
                         <Label alignment="CENTER" contentDisplay="CENTER" text=":" textAlignment="CENTER" />
-                        <TextField fx:id="crt_PickMinutesFinish" promptText="00">
+                        <TextField fx:id="tmt_PickMinutesFinish" promptText="00">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -177,9 +165,9 @@
                   </HBox>
                </children>
             </HBox>
-            <Button fx:id="crt_btnClearStaff" mnemonicParsing="false" onAction="#hanleActionCreateTask" GridPane.columnIndex="9" GridPane.rowIndex="1">
+            <Button fx:id="tmt_btnClearStaff" mnemonicParsing="false" onAction="#hanleActionCreateTask" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="1">
                <graphic>
-                  <FontIcon fx:id="crt_IkonClearStaff" iconLiteral="fltfmz-person-delete-16" iconSize="20" />
+                  <FontIcon fx:id="tmt_IkonClearStaff" iconLiteral="fltfmz-person-delete-16" iconSize="20" />
                </graphic>
             </Button>
          </children>
@@ -188,32 +176,31 @@
    <bottom>
       <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="crt_TextArea" prefHeight="155.0" wrapText="true">
+            <TextArea fx:id="tmt_TextArea" prefHeight="120.0" wrapText="true">
                <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
+                  <Insets bottom="20.0" left="50.0" right="50.0" />
                </VBox.margin>
             </TextArea>
-            <HBox fx:id="crt_bottomPane" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="crt_btnCancel" mnemonicParsing="false" onAction="#hanleActionCreateTask" text="Cancel">
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="50.0" right="25.0" top="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="crt_btnCreateTask" mnemonicParsing="false" onAction="#hanleActionCreateTask" text="Create Task">
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
          </children>
       </VBox>
    </bottom>
+   <top>
+      <AnchorPane fx:id="tmt_PaneTop" prefHeight="40.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="tmt_lbTopTitle" layoutY="8.0" text="Task Management" textFill="#166534" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="8.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="tmt_btnCancel" layoutX="627.0" layoutY="6.0" mnemonicParsing="false" onAction="#hanleActionCreateTask" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="6.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="tmt_IkonBackHome" iconLiteral="fltfal-arrow-right-28" iconSize="20" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

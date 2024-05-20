@@ -1,0 +1,192 @@
+#btnAddTask{
+	-fx-background-color: #BBF7D0;
+	-fx-background-radius: 7px;
+	-fx-text-fill: #166534;
+}
+#btnApply{
+	-fx-background-color: #90CAF9;
+	-fx-background-radius: 7px;
+	-fx-text-fill: #0D47A1;
+}
+    
+#choiceBoxDate{
+	-fx-background-color: transparent;
+	-fx-background-radius: 7px;
+	-fx-text-fill: #0D47A1;
+	-fx-border-color: #EEEEEE;
+	-fx-border-radius: 7px;
+}
+.series1 {
+    -fx-bar-fill: #81c6fa;
+}
+
+.series0 {
+    -fx-bar-fill: #7d98f8;
+}
+.chart {
+    -fx-border-color: none;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+    
+#hBoxChart{
+	
+}
+
+    
+#imageUserName{
+	
+}
+#lbNumberMess{
+	-fx-background-color: linear-gradient(to bottom, #ff512f, #dd2476);
+	-fx-background-radius: 50%;
+}
+    
+#lbManagementTask{
+	-fx-text-fill: #565656;
+}
+
+#tsDoingTitlePane, #tsCompletedTitlePane{
+	-fx-text-fill: #565656;
+}
+
+
+    
+#lbTitleTotalTasks, #lbTitleTasksDoing, #lbTitleTasksDelay, #lbTitleTasksCompleted{
+	-fx-text-fill: #565656;	
+}
+
+
+    
+#lbTotalTasks, #lbTasksDoing, #lbTasksDelay , #lbTasksCompleted{
+	-fx-text-fill: #565656;
+}
+
+    
+#lbUsername{
+	-fx-text-fill: #565656;
+}
+
+#lbPoisition{
+	-fx-text-fill: #565656;
+}
+
+
+    
+#pickDate{
+	-fx-background-color: transparent;
+	-fx-background-radius: 4px;
+	-fx-text-fill: #0D47A1;
+	-fx-border-color: #EEEEEE;
+	-fx-border-radius: 4px;
+}
+#pickDate .arrow-button{
+	-fx-background-color: #e8ebee;
+}
+
+#staffManagement{
+	
+}
+
+    
+#staffManagementControlls{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 7px;
+}
+
+    
+#staffManagementScroll{
+	-fx-background-color: transparent;
+}
+#staffManagementScroll .view-port{
+	-fx-background-color: transparent;
+}
+    
+#staffManagementTasksComplete, #staffManagementTasksDoing{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 7px;
+}
+
+    
+
+
+    
+#staffManagementTopGrid{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 7px;
+}
+
+    
+#staffManagementVBox{
+	
+}
+
+    
+#tableCompleted, #tableTasksDoing{
+	-fx-background-color: transparent;
+}
+#tableCompleted .column-header, #tableTasksDoing .column-header{
+	-fx-background-color: #F4F4F9;
+	-fx-pref-height: 40px;
+}
+#tableCompleted .column-header .label, #tableTasksDoing .column-header .label{
+	-fx-font-size: 14;
+	-fx-font-weight: 600;
+	-fx-text-fill: #565656;
+}
+
+#tableCompleted .table-row-cell, #tableTasksDoing .table-row-cell{
+	-fx-pref-height: 40px;
+	-fx-table-cell-border-color: transparent;
+	-fx-font-size: 14;
+	-fx-padding: 6 0 5 0;
+}
+
+    
+#tsCompletedContents, #tsCompletedFinishDate, #tsCompletedFinishTime, #tsCompletedStartDate, #tsCompletedStartTime,
+#tsCompletedTaskID,#tsCompletedTitle, #tsDoingContents, #tsDoingFinishDate, #tsDoingFinishTime, #tsDoingStartDate,
+#tsDoingStartTime, #tsDoingTaskID, #tsDoingTitle{
+	-fx-alignment: center ;
+}
+
+#tsDoingStatus{
+	-fx-alignment: center
+}
+
+    
+
+
+    
+#vBoxTasksCompleted{
+	
+}
+
+    
+#vBoxTasksDelayed{
+	
+}
+
+    
+#vBoxTasksDoing{
+	
+}
+
+    
+#vBoxTotalTasks{
+	
+}
+
+    
+#vBoxUserName{
+	
+}
+
+#btnBackToTasks{
+	-fx-background-color: transparent;
+}
+    
+#iKonBackToTasks{
+	-fx-fill:#565656;
+}
