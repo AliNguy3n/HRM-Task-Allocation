@@ -29,7 +29,7 @@ public class DashBoardController implements Initializable{
     private ToggleGroup NavBar;
 
     @FXML
-    private ToggleButton btnAccounts;
+    private ToggleButton btnAccount;
 
     @FXML
     private ToggleButton btnHome;
@@ -78,8 +78,8 @@ public class DashBoardController implements Initializable{
     	if(event.getSource()==btnManage) {
     		displayPaneElement("/manage/Manage.fxml");
     	}
-    	if(event.getSource()==btnAccounts) {
-    		displayPaneElement("/accounts/Accounts.fxml");
+    	if(event.getSource()==btnAccount) {
+    		displayPaneElement("/accounts/Account.fxml");
     	}
     	if(event.getSource()==btnSettings) {
     		displayPaneElement("/settings/Settings.fxml");
@@ -95,10 +95,16 @@ public class DashBoardController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		switch (Main.obSettings.getValue("pageStartup")) {
-		case "Accounts" -> displayPaneElement("/accounts/Accounts.fxml");
+		case "Accounts" -> displayPaneElement("/account/Account.fxml");
 		case "Manage" -> displayPaneElement("/manage/Manage.fxml");
 		case "Settings" -> displayPaneElement("/settings/Settings.fxml");
-		default -> displayPaneElement("/home/HomeManager.fxml");	
+		default -> {
+			if(Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2) {
+    			displayPaneElement("/home/TaskManagementForManager.fxml");
+    		}
+    		else {
+    			displayPaneElement("/home/TaskManagementForStaff.fxml");
+    		}
 		}
 	}
-}
+}}
