@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1000.0" stylesheets="@Account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Account.AccountController">
+
+    <VBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="20" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <!-- Thông tin tiêu đề bảng -->
+        <Label styleClass="table-title" text="User Information" />
+        <HBox alignment="TOP_CENTER" prefHeight="521.0" prefWidth="980.0" spacing="10.0">
+            <children>
+                <ImageView fx:id="avatarImageView" fitHeight="273.0" fitWidth="249.0" preserveRatio="true" styleClass="avatar">
+                    <image>
+                        <Image url="@../asset/BossAvatar01.png" />
+                    </image>
+                </ImageView>
+                <VBox alignment="TOP_RIGHT" fillWidth="false" spacing="24.0" HBox.hgrow="NEVER">
+                    <children>
+                        <Label text="Phone:" />
+                        <Label text="Email:" />
+                        <Label text="First Name:" />
+                        <Label text="Last Name:" />
+                        <Label text="Position:" />
+                        <Label text="Department:" />
+                    </children>
+                </VBox>
+                <VBox spacing="10.0">
+                    <children>
+                        <TextField fx:id="phoneNumberField" editable="false" minWidth="200" prefWidth="300" />
+                        <TextField fx:id="emailField" editable="false" minWidth="200" prefWidth="300" />
+                        <TextField fx:id="firstNameField" editable="false" minWidth="200" prefWidth="300" />
+                        <TextField fx:id="lastNameField" editable="false" minWidth="200" prefWidth="300" />
+                        <TextField fx:id="positionField" editable="false" minWidth="200" prefWidth="300" />
+                        <TextField fx:id="departmentField" editable="false" minWidth="200" prefWidth="300" />
+                        <HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="25.0" spacing="10">
+                            <Button onAction="#handleEdit" styleClass="button" text="Edit" />
+                            <Button fx:id="changePassBtn" onAction="#handleChangePassword" styleClass="button" text="Change Password" />
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </VBox>
+</AnchorPane>

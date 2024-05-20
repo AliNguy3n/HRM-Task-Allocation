@@ -1,5 +1,5 @@
 package application;
-	
+
 import java.io.IOException;
 
 import fio.FIOCore;
@@ -20,7 +20,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		
+
 		/**
 		 * Tìm nạp thông tin của ứng dụng
 		 * Đối tượng @obSettings chứa tất cả các thông tin về dữ liệu đăng nhập vào Database và dữ liệu người dùng.
@@ -35,18 +35,19 @@ public class Main extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		Parent root=null;
-		
+
 		try {
 			if(obSettings.getValue("serverName")!=null) {
 				root = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
 			}else {
+				obSettings.setValue("pageStartup", "Settings");
 				root = FXMLLoader.load(getClass().getResource("/dashboard/DashBoard.fxml"));
 			}
-			
+
 			Scene scene = new Scene(root);
-			
+
 			primaryStage.setTitle("Login");
 			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
 			primaryStage.setScene(scene);
@@ -55,7 +56,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

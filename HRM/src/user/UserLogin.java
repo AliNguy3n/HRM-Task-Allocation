@@ -8,6 +8,7 @@ package user;
 
 public class UserLogin {
 	int id;
+	String avatarPath;
 	String firstname;
 	String lastname;
 	String email;
@@ -18,6 +19,7 @@ public class UserLogin {
 	String permission;
 	String Status;
 	float salary;
+	String password;
 	
 /**
  * Các phương thức @getter và @setter cho đối tượng.
@@ -88,5 +90,21 @@ public class UserLogin {
 	public void setSalary(float salary) {
 		this.salary = salary;
 	}
-	
+
+	public String getAvatarPath() {
+		System.out.println(avatarPath);
+		return avatarPath;
+	}
+
+	public void setAvatarPath(String avatarPath) {
+		this.avatarPath = avatarPath;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

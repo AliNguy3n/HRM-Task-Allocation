@@ -1,0 +1,74 @@
+/* Đặt màu nền và màu chữ cho toàn bộ AnchorPane */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
+    -fx-padding: 20px;
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+}
+
+/* Thiết lập phong cách cho Label */
+.label {
+    -fx-text-fill: #3a3a3a;
+    -fx-font-weight: bold;
+}
+
+/* Thiết lập phong cách cho TextField và PasswordField */
+.text-field, .password-field {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #3a3a3a;
+}
+
+/* Thiết lập phong cách cho ComboBox */
+.combo-box {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    /*-fx-padding: 2px;*/
+    -fx-font-size: 14px;
+    -fx-text-fill: #3a3a3a;
+}
+
+/* Thiết lập phong cách cho Button */
+.button {
+    -fx-background-color: #6a1b9a;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 5px 20px;
+}
+
+.button:hover {
+    -fx-background-color: #4a148c;
+}
+
+.button:pressed {
+    -fx-background-color: #38006b;
+}
+
+/* Thiết lập phong cách cho Button Browse */
+#addImage {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #6a1b9a;
+    -fx-border-width: 1px;
+    -fx-text-fill: #6a1b9a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+#addImage:hover {
+    -fx-background-color: #f3e5f5;
+}
+
+#addImage:pressed {
+    -fx-background-color: #e1bee7;
+}

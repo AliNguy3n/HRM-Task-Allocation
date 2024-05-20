@@ -1,0 +1,66 @@
+.button {
+    -fx-background-color: #5a67d8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+/* Đặt font chữ và màu nền cho AnchorPane */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    -fx-font-family: 'Arial';
+}
+
+/* Tiêu đề bảng */
+.table-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-text-fill: #4a90e2;
+    /*-fx-alignment: CENTER; !* Đưa tiêu đề ra giữa *!*/
+    -fx-text-alignment: center;
+    /*-fx-pref-width: 100%;*/
+}
+
+/* Điều chỉnh avatar */
+.avatar {
+    -fx-fit-width: 200px;
+    -fx-fit-height: 200px;
+    -fx-preserve-ratio: true;
+    -fx-clip: new Circle(100, 100, 100); /* Định dạng hình tròn */
+}
+
+/* Định dạng nút */
+.button {
+    -fx-background-color: #5a67d8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #434190;
+}
+
+/* Định dạng cho các TextField */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-border-color: #5a67d8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+    -fx-padding: 5px;
+}
+
+.text-field:disabled {
+    -fx-opacity: 1; /* Giữ độ rõ nét khi không cho phép chỉnh sửa */
+}
+
+/* Định dạng cho các Label */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+

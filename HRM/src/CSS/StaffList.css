@@ -1,0 +1,49 @@
+/* Đặt font chữ và màu nền cho AnchorPane */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    -fx-font-family: 'Arial';
+}
+
+/* Điều chỉnh TableView */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+}
+
+/* Đặt kích thước cố định cho avatar */
+.image-view {
+    -fx-fit-width: 50px;
+    -fx-fit-height: 50px;
+    -fx-preserve-ratio: true;
+}
+
+/* Định dạng nút */
+.button {
+    -fx-background-color: #5a67d8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #434190;
+}

@@ -109,6 +109,8 @@ public class LoginController implements Initializable{
     			Main.userLogin.setPhonenumber(res.getString("Phone_Number"));
     			Main.userLogin.setPosition(res.getString("Position"));
     			Main.userLogin.setSalary(res.getFloat("Salary"));
+				Main.userLogin.setAvatarPath(res.getString("Avatar"));
+				Main.userLogin.setPassword(res.getString("password"));
         		check = true;
         		
         	}else {
@@ -124,7 +126,7 @@ public class LoginController implements Initializable{
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		txtUsername.setText("admin");
+		txtUsername.setText("nghia@gamil.com");
 		txtPassword.setText("123");
 	}
     

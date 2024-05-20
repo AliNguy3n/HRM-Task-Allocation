@@ -1,0 +1,73 @@
+/* Đặt font chữ và màu nền cho AnchorPane */
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    -fx-font-family: 'Arial';
+}
+
+/* Tiêu đề bảng */
+.table-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-text-fill: #4a90e2;
+    -fx-alignment: CENTER; /* Đưa tiêu đề ra giữa */
+    -fx-text-alignment: center;
+    /*-fx-pref-width: 100%;*/
+}
+
+/* Điều chỉnh TableView */
+.table-view {
+    -fx-background-color: #5a67d8;/*rgba(255, 255, 255, 0.9); /* Màu hơi trong suốt */
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #5a67d8; /* Màu nền cho phần heading của cột */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #5a67d8; /* Màu chữ cho phần heading của cột */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-view .filler {
+    /*-fx-background-color: transparent;*/
+}
+
+.table-view .table-row-cell {
+    /*-fx-background-color: rgba(255, 255, 255, 0.8);*/
+    /*-fx-border-color: rgba(0, 0, 0, 0.1);*/
+    /*-fx-border-width: 0 0 1 0;*/
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-alignment: CENTER; /* Căn giữa văn bản trong ô */
+}
+
+/* Đặt kích thước cố định cho avatar và định dạng thành hình tròn */
+.image-view {
+    -fx-fit-width: 50px;
+    -fx-fit-height: 50px;
+    -fx-preserve-ratio: true;
+    -fx-clip: new Circle(25, 25, 25); /* Định dạng hình tròn */
+}
+
+/* Định dạng nút */
+.button {
+    -fx-background-color: #5a67d8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #434190;
+}
+
+/* Căn giữa văn bản trong các cột */
+.center-text {
+    -fx-alignment: CENTER;
+}

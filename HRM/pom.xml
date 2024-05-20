@@ -34,6 +34,13 @@
 			<artifactId>ikonli-javafx</artifactId>
 			<version>12.3.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>12.7.0.jre11-preview</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-core -->
 		<dependency>
 			<groupId>org.kordamp.ikonli</groupId>

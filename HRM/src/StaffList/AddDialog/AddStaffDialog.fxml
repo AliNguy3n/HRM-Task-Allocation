@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400" stylesheets="@AddStaffDialog.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StaffList.AddDialog.AddStaffDialogController">
+    <children>
+        <Label layoutX="41.0" layoutY="58.0" text="First Name" />
+        <TextField fx:id="firstNameField" layoutX="151.0" layoutY="54.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="98.0" text="Last Name" />
+        <TextField fx:id="lastNameField" layoutX="151.0" layoutY="94.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="138.0" text="Phone Number" />
+        <TextField fx:id="phoneNumberField" layoutX="151.0" layoutY="134.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="178.0" text="Email" />
+        <TextField fx:id="emailField" layoutX="151.0" layoutY="174.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="218.0" text="Department" />
+        <ComboBox fx:id="departmentComboBox" layoutX="151.0" layoutY="214.0" prefWidth="200.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Marketing" />
+                    <String fx:value="Operation" />
+                    <String fx:value="Sale" />
+                    <String fx:value="HR" />
+                    <String fx:value="Strategy" />
+                    <String fx:value="Out Sourcing" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label layoutX="41.0" layoutY="258.0" text="Position" />
+        <ComboBox fx:id="positionComboBox" layoutX="151.0" layoutY="254.0" prefWidth="200.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Executive" />
+                    <String fx:value="Team Leader" />
+                    <String fx:value="Manager" />
+                    <String fx:value="Head" />
+                    <String fx:value="Director" />
+                    <String fx:value="BOD" />
+                    <String fx:value="CEO" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label layoutX="41.0" layoutY="298.0" text="Username" />
+        <TextField fx:id="usernameField" layoutX="151.0" layoutY="294.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="338.0" text="Password" />
+        <PasswordField fx:id="passwordField" layoutX="151.0" layoutY="334.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="378.0" text="Confirm Pass" />
+        <PasswordField fx:id="confirmPasswordField" layoutX="151.0" layoutY="374.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="41.0" layoutY="418.0" text="Salary" />
+        <TextField fx:id="salaryField" layoutX="151.0" layoutY="414.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Button fx:id="okButton" layoutX="209.0" layoutY="457.0" text="OK" />
+        <Button fx:id="cancelButton" layoutX="275.0" layoutY="457.0" text="Cancel" />
+        <Label layoutX="41.0" layoutY="23.0" text="Avatar" />
+        <Button fx:id="addImage" layoutX="151.0" layoutY="19.0" mnemonicParsing="false" style="-fx-background-color: #fff; -fx-border-color: #000;" text="Browse..." />
+    </children>
+</AnchorPane>
