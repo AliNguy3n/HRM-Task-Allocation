@@ -65,6 +65,11 @@ public class ForgotPasswordController {
 							txtSecrect.clear();
 							txtUsername.clear();
 						}
+					}else {
+						Alert newAlert = new Alert(AlertType.INFORMATION);
+						newAlert.setTitle("Your information not true!");
+						newAlert.setHeaderText("Your information invalid!");
+						newAlert.showAndWait();
 					}
 				} catch (SQLException e) {
 

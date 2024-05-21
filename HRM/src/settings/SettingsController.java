@@ -116,7 +116,7 @@ public class SettingsController implements Initializable {
 	 *	databaseName;
 	 *	port;
 	 */
-    String[] pageChoice = {"Task Management","Manage","Accounts","Settings"};
+    String[] pageChoice = {"Task Management","Manage","Accounts","Settings","StaffList"};
     @FXML
     void handleSettings(ActionEvent event) {
     	if(event.getSource()==btnApplySettings) { 		

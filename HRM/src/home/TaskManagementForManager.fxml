@@ -242,13 +242,13 @@
                               </Label>
                               <TableView fx:id="tableTaskRequires" layoutX="63.0" layoutY="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                  <columns>
-                                    <TableColumn fx:id="ttrTaskID" prefWidth="62.0" text="Task ID" />
+                                    <TableColumn fx:id="ttrTaskID" prefWidth="62.0" text="Request ID" />
                                     <TableColumn fx:id="ttrTitle" prefWidth="102.0" text="Title" />
                                     <TableColumn fx:id="ttrFrom" prefWidth="199.0" text="From" />
                                     <TableColumn fx:id="ttrContents" prefWidth="111.5" text="Contents Requires" />
                                     <TableColumn fx:id="ttrTime" prefWidth="87.0" text="Time" />
                                     <TableColumn fx:id="ttrStatus" prefWidth="113.5" text="Status" />
-                                    <TableColumn fx:id="ttrAction" prefWidth="89.5" text="Action" />
+                                    <TableColumn fx:id="ttrAction" prefWidth="89.5" text="Action" visible="false" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

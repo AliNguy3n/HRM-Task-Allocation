@@ -30,6 +30,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -210,7 +211,7 @@ public class TaskManagementForManagerController implements Initializable{
     private TableColumn<RequestItem, String> ttrFrom;
 
     @FXML
-    private TableColumn<RequestItem, String> ttrStatus;
+    private TableColumn<RequestItem, Integer> ttrStatus;
 
     @FXML
     private TableColumn<RequestItem, Integer> ttrTaskID;
@@ -255,6 +256,7 @@ public class TaskManagementForManagerController implements Initializable{
     	}
     	else if(event.getSource() ==btnApply) {
     		setTaskInterface();
+    		setRequestInterface();
     	}
     	
     }
@@ -399,14 +401,76 @@ public class TaskManagementForManagerController implements Initializable{
 	 * @setRequestTableProperty() đặt thuộ tính cho các trường trong bảng @tableManagementPersonnel
 	 */
 	private void setRequestTableProperty() {
-		ttrTaskID.setCellValueFactory(new PropertyValueFactory<RequestItem, Integer>("id"));
+		ttrTaskID.setCellValueFactory(new PropertyValueFactory<RequestItem, Integer>("requestid"));
 		ttrTitle.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("title"));
 		ttrContents.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("request"));
 		ttrTime.setCellValueFactory(new PropertyValueFactory<RequestItem, Date>("timestamp"));
-		//ttrStatus.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("status"));
+		ttrStatus.setCellValueFactory(new PropertyValueFactory<RequestItem, Integer>("seem"));
 		//ttrAction.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("taskComplete"));
 		ttrFrom.setCellValueFactory(new PropertyValueFactory<RequestItem, String>("name"));
 		
+	    Callback<TableColumn<RequestItem, Integer>, TableCell<RequestItem, Integer>> newCellFactory = arg0 ->  {
+	    	return new TableCell<RequestItem, Integer>(){
+	    		
+	    		public void updateItem(Integer item, boolean empty) {
+	    			super.updateItem(item, empty);
+	    			if(empty) {
+	    				setGraphic(null);
+						setText(null);
+	    			}
+	    			else {
+	    				String str ;
+	    				if(item ==1 ) {
+	    					str = "Seen";
+	    				}else {
+	    					str = "UnSeen";
+	    				}
+						
+						Button newButton = new Button();
+						newButton.setText(str);
+						if(str.equals("UnSeen")) {
+							newButton.setStyle("-fx-background-color:#FFC2B8; -fx-text-fill:#FF4343;-fx-pref-width: 70px; "
+									+ "-fx-font-size: 12px;-fx-font-weight:bold; -fx-background-radius:5px;");
+						}
+						else {
+							newButton.setStyle("-fx-background-color:#BBF7D0; -fx-text-fill:#166534;-fx-pref-width: 70px; "
+									+ "-fx-font-size: 12px;-fx-font-weight:bold; -fx-background-radius:5px;");
+						}
+						HBox managebtn = new HBox(newButton);
+						managebtn.setFillHeight(false);
+                        managebtn.setStyle("-fx-alignment:center;");
+                        setGraphic(managebtn);
+	    			}
+	    			
+	    		}
+	    		
+	    	};
+	    };
+		
+	    ttrStatus.setCellFactory(newCellFactory);
+	    
+		tableTaskRequires.setRowFactory(tv ->{
+			TableRow<RequestItem> row = new TableRow<RequestItem>();
+			row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                	RequestItem rowData = row.getItem();
+                	 	               	
+                	TaskItem taskItem =null;
+                	for (TaskItem item : taskList) {
+						if(item.getId()==rowData.getTaskid()) {
+							taskItem = item;
+							
+						}
+					}
+            		loadItemsPane("/home/TaskManagement.fxml","Task Management", taskItem);
+            		setDisplayMode("Task Management");  
+            		DAPTaskPerform dap = new DAPTaskPerform();
+            		dap.updateRequestSeem(rowData.getRequestid());
+            		dap.closeCnn();
+                }
+            });
+            return row;
+		});
 		
 	}
 	/**
@@ -445,7 +509,7 @@ public class TaskManagementForManagerController implements Initializable{
 		int countStaff = 0;
 		try {
 			while(rs.next()) {
-				StaffItem sti = new StaffItem(rs.getInt("ID"), rs.getString("First_Name")+" " + rs.getString("Last_Name"), 				rs.getString("Email"), rs.getString("Phone_Number"), rs.getInt("TotalTasks"), rs.getInt("TasksCompleted"), 				rs.getInt("TasksDelay"), rs.getString("Position"));
+				StaffItem sti = new StaffItem(rs.getInt("ID"), rs.getString("First_Name")+" " + rs.getString("Last_Name"), 				rs.getString("Email"), rs.getString("Phone_Number"), rs.getInt("TasksCompleted") ,rs.getInt("TotalTasks") , 				rs.getInt("TasksDelay"), rs.getString("Position"));
 				staffList.add(sti);
 				countStaff++;
 			}
@@ -472,7 +536,7 @@ public class TaskManagementForManagerController implements Initializable{
 			while(rs.next()) {
 				RequestItem rqi = new RequestItem(rs.getInt("ID"), rs.getInt("From"), rs.getString("Request"), 
 						rs.getDate("Timestamp"), rs.getInt("Seem"), rs.getString("Title"), rs.getString("First_Name")+" "+
-						rs.getString("Last_Name"));
+						rs.getString("Last_Name"), rs.getInt("TaskID"));
 				System.out.println(rs.getString("Title"));
 				requestList.add(rqi);
 				countRequest++;
@@ -563,6 +627,15 @@ public class TaskManagementForManagerController implements Initializable{
 			homePane.setCenter(loader.load());
 			TaskManagementForStaffController controller = loader.getController();
 			controller.setUserRetrive(staffitem);
+			controller.getButtonBackToTasks().setOnAction(event ->{
+				BorderPane home =  (BorderPane) homePane.getParent();
+				try {
+					home.setCenter(FXMLLoader.load(getClass().getResource("/home/TaskManagementForManager.fxml")));
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

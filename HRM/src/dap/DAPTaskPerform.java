@@ -122,7 +122,7 @@ public class DAPTaskPerform extends DAPCore {
 	public ResultSet selectAllRequest(int staffIDTo, Date start, Date end) {
 		String query ="SELECT TaskRequest.[ID], TaskRequest.[From], TaskRequest.[Request],\r\n"
 				+ "TaskRequest.[Timestamp], TaskRequest.[Seem], Task.[Title],\r\n"
-				+ "Staff.[First_Name], Staff.[Last_Name]"
+				+ "Staff.[First_Name], Staff.[Last_Name], Task.[ID] As [TaskID]"
 				+ "FROM TaskRequest\r\n"
 				+ "INNER JOIN Task ON Task.ID = TaskRequest.TaskID\r\n"
 				+ "INNER JOIN Staff ON Staff.ID =TaskRequest.[From]\r\n"
@@ -142,6 +142,7 @@ public class DAPTaskPerform extends DAPCore {
 		}
 		return null;
 	}
+	
 	
 	/**
 	 * @selectDataForChart Phương thức này được sử dụng để nạp dữ liệu đầu vào cho Biểu đồ Donut trong TaskManagement
@@ -200,6 +201,22 @@ public class DAPTaskPerform extends DAPCore {
 		return null;
 	}
 	
+	public int updateRequestSeem(int requestID) {
+		String query ="UPDATE [TaskRequest] \r\n"
+				+ "  SET [Seem] = 1"
+				+ "  WHERE ID =?";
+		cnn = DBConnect.makeConnection(serverName, port, database, usernameServer, passwordServer);
+		try {
+			st= cnn.prepareStatement(query);
+			st.setInt(1, requestID);
+			count = st.executeUpdate();
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	@Override
 	public ResultSet select(String param1, String param2) {
 		return null;
@@ -234,5 +251,13 @@ public class DAPTaskPerform extends DAPCore {
 			e.printStackTrace();
 		}		
 	}
-
+	
+	public void closeCnn() {
+		try {
+			st.close();
+			cnn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}				
+	}
 }

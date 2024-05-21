@@ -26,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.PopOver;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import application.Main;
@@ -53,10 +54,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.stage.PopupWindow.AnchorLocation;
 import javafx.util.Callback;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.control.ChoiceBox;
@@ -262,6 +265,9 @@ public class TaskManagementForStaffController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		lbUsername.setText(Main.userLogin.getFirstname()+" "+Main.userLogin.getLastname());
 		lbPoisition.setText(Main.userLogin.getPosition());
+		//imageUserName.setImage(new Image(getClass().getResourceAsStream(Main.userLogin.getAvatarPath())));
+		lbNumberMess.setVisible(false);
+		btnAddTask.setVisible(false);
 		setProgressTaskInterface();
 		setCompletedTaskInterface();
 		choiceBoxDate.getItems().addAll(date);
@@ -272,6 +278,8 @@ public class TaskManagementForStaffController implements Initializable{
 			chartValueTotal.put(Date.valueOf(localDate.plusDays(i)), 0);
 			chartValueComplete.put(Date.valueOf(localDate.plusDays(i)), 0);
 		}
+		
+		checkMessage();
 		setTaskInterface();
 		btnBackToTasks.setDisable(true);
 		btnBackToTasks.setVisible(false);
@@ -290,6 +298,9 @@ public class TaskManagementForStaffController implements Initializable{
 		mode = 1;
 		setTaskInterface();
 		btnAddTask.setVisible(false);
+		lbNumberMess.setVisible(false);
+		btnBackToTasks.setDisable(false);
+		btnBackToTasks.setVisible(true);
 	}
 	
 	public Button getButtonBackToTasks() {
@@ -416,7 +427,7 @@ public class TaskManagementForStaffController implements Initializable{
 	    tableTasksDoing.setRowFactory(tv ->{
 	    	TableRow<TaskItem> row = new TableRow<TaskItem>();
 	    	row.setOnMouseClicked(event ->{
-	    		if(!row.isEmpty() && event.getButton()== MouseButton.PRIMARY && event.getClickCount()==2) {
+	    		if(mode == 0 && !row.isEmpty() && event.getButton()== MouseButton.PRIMARY && event.getClickCount()==2) {
 	    			setDisplayMode("Task Management");
 	    			loadItemsPane("/home/TaskManagement.fxml","Task Management", row.getItem());
 	    		}
@@ -438,7 +449,7 @@ public class TaskManagementForStaffController implements Initializable{
 	    tableCompleted.setRowFactory(tv ->{
 	    	TableRow<TaskItem> row = new TableRow<TaskItem>();
 	    	row.setOnMouseClicked(event ->{
-	    		if(!row.isEmpty() && event.getButton()== MouseButton.PRIMARY && event.getClickCount()==2) {
+	    		if(mode == 0 && !row.isEmpty() && event.getButton()== MouseButton.PRIMARY && event.getClickCount()==2) {
 	    			setDisplayMode("Task Management");
 	    			loadItemsPane("/home/TaskManagement.fxml","Task Management", row.getItem());
 	    		}
@@ -561,5 +572,16 @@ public class TaskManagementForStaffController implements Initializable{
 		hBoxChart.getChildren().clear();
 		hBoxChart.getChildren().addAll(donutChartTile,barChart);
        
+	}
+	
+	private void checkMessage() {
+		lbNumberMess.setOnMouseClicked(e ->{
+			VBox vbox = new VBox();
+			
+			PopOver popOver = new PopOver();
+			popOver.setTitle("Notification:");
+			
+			popOver.show(lbNumberMess);
+		});
 	}
 }

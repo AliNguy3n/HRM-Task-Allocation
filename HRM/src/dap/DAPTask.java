@@ -222,6 +222,9 @@ public class DAPTask extends DAPCore{
         return deleteFromTable("[Task_Execution]", "[TaskID]", TaskID);
     }
 
+    public int deleteTaskRequest(int TaskID) {
+    	return deleteFromTable("[TaskRequest]", "[TaskID]", TaskID);
+    }
     @Override
     public int delete(int TaskID) {
         int status = 1;
@@ -229,7 +232,7 @@ public class DAPTask extends DAPCore{
             if (deleteTaskExecution(TaskID) == 0) { status = 0;};
             if (deleteStaffTask(TaskID) == 0) { status = 0;};
             if (deleteTask(TaskID) == 0){ status = 0;};
-           
+            if (deleteTask(TaskID) ==0){status = 0;};
             return status;
         } catch (Exception e) {
             e.printStackTrace();

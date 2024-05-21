@@ -123,6 +123,7 @@ public class DashBoardController implements Initializable{
 		case "Accounts" -> displayPaneElement("/account/Account.fxml");
 		case "Manage" -> displayPaneElement("/manage/Manage.fxml");
 		case "Settings" -> displayPaneElement("/settings/Settings.fxml");
+		case "StaffList" -> displayPaneElement("/StaffList/StaffList.fxml");
 		default -> {
 			if(Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2) {
     			displayPaneElement("/home/TaskManagementForManager.fxml");

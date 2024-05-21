@@ -7,30 +7,31 @@ import java.sql.Date;
 * @author Duc Linh
 */
 public class RequestItem {
-	private int id;
+	private int requestid;
 	private int from;
 	private String request;
 	private Date timestamp;
 	private int seem;
 	private  String title;
 	private String name;
-
-	public RequestItem(int id, int from, String request, Date timestamp, int seem, String title, String name) {
+	private int taskid;
+	public RequestItem(int requestid, int from, String request, Date timestamp, int seem, String title, String name,
+			int taskid) {
 		super();
-		this.id = id;
+		this.requestid = requestid;
 		this.from = from;
 		this.request = request;
 		this.timestamp = timestamp;
 		this.seem = seem;
 		this.title = title;
 		this.name = name;
-
+		this.taskid = taskid;
 	}
-	public int getId() {
-		return id;
+	public int getRequestid() {
+		return requestid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setRequestid(int requestid) {
+		this.requestid = requestid;
 	}
 	public int getFrom() {
 		return from;
@@ -67,6 +68,12 @@ public class RequestItem {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getTaskid() {
+		return taskid;
+	}
+	public void setTaskid(int taskid) {
+		this.taskid = taskid;
 	}
 	
 	
