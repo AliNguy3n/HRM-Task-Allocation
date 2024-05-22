@@ -1,7 +1,7 @@
 notification:false
-databaseName:HRMandTaskAllocations
+databaseName:hrmandtaskallocations
 port:1433
 serverName:DESKTOP-TA46JH7\MSSQLSEVER
 usernameServer:sa
-pageStartup:Task Management
+pageStartup:settings
 passwordServer:Nghia456

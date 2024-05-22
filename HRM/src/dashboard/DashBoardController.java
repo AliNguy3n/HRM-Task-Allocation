@@ -90,9 +90,11 @@ public class DashBoardController implements Initializable{
     			displayPaneElement("/home/TaskManagementForStaff.fxml");
     		}
     	}
-    	if(event.getSource()==btnManage) {
-    		displayPaneElement("/Manage/Manage.fxml");
-    	}
+    	if(event.getSource()==btnManage && Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2) {
+    		displayPaneElement("/Manage/ManagerManage.fxml");
+    	}else if(event.getSource()==btnManage && !(Main.userLogin.getPermission() == 1 || Main.userLogin.getPermission() ==2)) {
+            displayPaneElement("/Manage/Manage.fxml");
+        }
     	if(event.getSource()==btnAccount) {
     		displayPaneElement("/account/Account.fxml");
     	}

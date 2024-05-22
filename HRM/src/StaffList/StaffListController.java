@@ -32,8 +32,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class StaffListController implements Initializable {
-    @FXML
-    private TableColumn<StaffDTO, ImageView> avatarCol;
+//    @FXML
+//    private TableColumn<StaffDTO, ImageView> avatarCol;
     @FXML
     private TableColumn<StaffDTO, String> departmentCol;
     @FXML
@@ -82,19 +82,19 @@ public class StaffListController implements Initializable {
         phoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         departmentCol.setCellValueFactory(new PropertyValueFactory<>("department"));
 
-        avatarCol.setCellValueFactory(cellData -> {
-            String avatarPath = cellData.getValue().getAvatarPath();
-            ImageView imageView = new ImageView();
-            if (avatarPath != null && !avatarPath.isEmpty() && new File(avatarPath).exists()) {
-                imageView.setImage(new Image(new File(avatarPath).toURI().toString(), true));
-                imageView.setFitHeight(50);
-                imageView.setFitWidth(50);
-                imageView.setPreserveRatio(true);
-                imageView.setClip(new Circle(25, 25, 25));
-                imageView.getStyleClass().add("image-view");
-            }
-            return new SimpleObjectProperty<>(imageView);
-        });
+//        avatarCol.setCellValueFactory(cellData -> {
+//            String avatarPath = cellData.getValue().getAvatarPath();
+//            ImageView imageView = new ImageView();
+//            if (avatarPath != null && !avatarPath.isEmpty() && new File(avatarPath).exists()) {
+//                imageView.setImage(new Image(new File(avatarPath).toURI().toString(), true));
+//                imageView.setFitHeight(50);
+//                imageView.setFitWidth(50);
+//                imageView.setPreserveRatio(true);
+//                imageView.setClip(new Circle(25, 25, 25));
+//                imageView.getStyleClass().add("image-view");
+//            }
+//            return new SimpleObjectProperty<>(imageView);
+//        });
 
         editCol.setCellFactory(col -> new TableCell<>() {
             private final Button editButton = new Button("Edit");
@@ -165,6 +165,7 @@ public class StaffListController implements Initializable {
         staffList.setAll(staffData);
         filteredList.setAll(staffData);
         staffTable.setItems(filteredList);
+
     }
 
     private void filterStaffList() {

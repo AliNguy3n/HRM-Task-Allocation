@@ -12,11 +12,10 @@
 <AnchorPane prefHeight="650.0" prefWidth="1000.0" stylesheets="@Account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Account.AccountController">
 
     <VBox alignment="CENTER" layoutX="20.0" layoutY="20.0" spacing="20" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-        <!-- Thông tin tiêu đề bảng -->
         <Label styleClass="table-title" text="User Information" />
         <HBox alignment="TOP_CENTER" prefHeight="521.0" prefWidth="980.0" spacing="10.0">
             <children>
-                <ImageView fx:id="avatarImageView" fitHeight="273.0" fitWidth="249.0" preserveRatio="true" styleClass="avatar">
+                <ImageView fx:id="avatarImageView" fitHeight="273.0" fitWidth="273.0" preserveRatio="true" styleClass="avatar">
                     <image>
                         <Image url="@../asset/BossAvatar01.png" />
                     </image>
