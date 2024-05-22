@@ -35,6 +35,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import application.Main;
 import dap.DAPLogin;
+import dashboard.DashBoardController;
 import fio.FIOEncrypting;
 
 public class LoginController implements Initializable{
@@ -77,13 +78,29 @@ public class LoginController implements Initializable{
     	if(event.getSource()==btnLogin) {
     		if(checkLogin()) {
     			try {
-					Parent dashBoard = FXMLLoader.load(getClass().getResource("/dashboard/DashBoard.fxml"));
+    				FXMLLoader newLoader = new FXMLLoader(getClass().getResource("/dashboard/DashBoard.fxml"));
+					Parent dashBoard = newLoader.load();
 					Scene newScene = new Scene(dashBoard);
 					Stage newStage = new Stage();
 					newStage.setTitle("HRM & Task Allocation Appliction");
 					newStage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
 					newStage.setScene(newScene);
 					newStage.show();
+					DashBoardController dashBoardController = newLoader.getController();
+					dashBoardController.getButtonLogout().setOnAction(e ->{
+						try {
+							Stage  stage = new Stage();
+							stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/login/Login.fxml"))));
+							stage.centerOnScreen();
+							stage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
+							stage.setTitle("HRM & Task Allocation Appliction");
+							stage.show();
+							newStage.close();
+						} catch (IOException e1) {
+
+							e1.printStackTrace();
+						}
+					});
 					borderPaneLoginMain.getScene().getWindow().hide();
 				} catch (IOException e) {
 					e.printStackTrace();

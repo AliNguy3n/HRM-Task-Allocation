@@ -266,7 +266,7 @@ public class TaskManagementForStaffController implements Initializable{
 		lbUsername.setText(Main.userLogin.getFirstname()+" "+Main.userLogin.getLastname());
 		lbPoisition.setText(Main.userLogin.getPosition());
 		//imageUserName.setImage(new Image(getClass().getResourceAsStream(Main.userLogin.getAvatarPath())));
-		lbNumberMess.setVisible(false);
+		//lbNumberMess.setVisible(false);
 		btnAddTask.setVisible(false);
 		setProgressTaskInterface();
 		setCompletedTaskInterface();
