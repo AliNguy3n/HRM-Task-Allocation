@@ -3,14 +3,23 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="messHbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="350.0" stylesheets="@../CSS/MessageItem.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.MessageItemController">
    <children>
-      <Label text="Label" textFill="#565656" wrapText="true">
-         <HBox.margin>
-            <Insets left="20.0" />
-         </HBox.margin>
-      </Label>
+      <VBox fx:id="messVbox" prefHeight="60.0" prefWidth="350.0" spacing="3.0">
+         <children>
+            <Label fx:id="messTitle" text="Label">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="messContent" prefHeight="17.0" prefWidth="314.0" text="Label" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
    </children>
 </HBox>

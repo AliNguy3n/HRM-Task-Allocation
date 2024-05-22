@@ -1,0 +1,21 @@
+#messVbox{
+
+	-fx-background-color: #f4fcff;
+	
+}
+#messHbox{
+	-fx-border-color: #42A5F5;
+	-fx-border-width: 0 0 0 3;
+	-fx-border-radius: 6px;
+	-fx-background-color: transparent;
+	
+}
+
+#messContent{
+		
+}
+
+#messTitle{
+	-fx-text-fill: #565656;
+	
+}

@@ -107,8 +107,8 @@ public class DAPTaskReport extends DAPCore{
 	 * @return
 	 */
 	public int insertRequest(int staffIDFrom, int staffIDTo, int taskID, String request) {
-		String query ="INSERT INTO [TaskRequest] ([TaskID],[From],[To],[Request])\r\n"
-					 + "VALUES(?,?,?,?)";
+		String query ="INSERT INTO [TaskRequest] ([TaskID],[From],[To],[Request],[Seem])\r\n"
+					 + "VALUES(?,?,?,?,0)";
 		cnn = DBConnect.makeConnection(serverName, port, database, usernameServer, passwordServer);
 		try {
 			st= cnn.prepareStatement(query);

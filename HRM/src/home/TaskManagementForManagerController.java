@@ -1,5 +1,7 @@
 package home;
-
+/**
+* @author Duc Linh
+*/
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -7,30 +9,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
+import org.controlsfx.control.PopOver;
+import org.controlsfx.control.PopOver.ArrowLocation;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import application.Main;
 import dap.DAPTaskPerform;
 import dap.DAPTask;
-import displayperformance.SmoothScroll;
+
 import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.chart.ChartData;
-import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-/**
-* @author Duc Linh
-*/
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -55,11 +59,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
-import threadapp.ThreadLoadDataHomeChart;
 
 
 public class TaskManagementForManagerController implements Initializable{
 
+    @FXML
+    private Label lbNumberMess;
+    
     @FXML
     private Button btnAddTask;
 
@@ -241,13 +247,17 @@ public class TaskManagementForManagerController implements Initializable{
     ObservableList<TaskItem> taskList = FXCollections.observableArrayList();
     ObservableList<StaffItem> staffList = FXCollections.observableArrayList();
     ObservableList<RequestItem> requestList = FXCollections.observableArrayList();
-    
+    ArrayList<RequestItem> messList = new ArrayList<RequestItem>();
     private Tile donutChartTile;
     int totalTasks = 0;
     int tasksComplete = 0;
     int tasksDoing = 0;
     int tasksDelay = 0;
     TaskItem tit = null;
+    
+	int rsCount=0;
+	int messUnChecked = 0;
+	
     @FXML
     void handleManagementTask(ActionEvent event) {
     	if(event.getSource() ==btnAddTask) {
@@ -281,7 +291,9 @@ public class TaskManagementForManagerController implements Initializable{
 		setRequestInterface();
 		setDonutChartInterface();
 		
-		
+		intervalCheckMess();
+		checkMessage();
+		lbNumberMess.setVisible(!Boolean.valueOf(Main.obSettings.getValue("notification")));
 		//new SmoothScroll(homePaneCenter, 0.01);
         
 	}
@@ -700,4 +712,117 @@ public class TaskManagementForManagerController implements Initializable{
         }
         return null;
     }
+	
+	private void checkMessage() {
+		
+		lbNumberMess.setOnMouseClicked(e ->{
+			VBox vbox = new VBox();	
+			
+			for (RequestItem item : messList) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/MessageItem.fxml"));
+				
+				try {
+					vbox.getChildren().add(loader.load());
+					MessageItemController controller = loader.getController();
+					controller.getMessValue(item);
+				} catch (IOException e1) {
+
+					e1.printStackTrace();
+				}
+			}
+						 
+			ScrollPane srp = new ScrollPane();
+			srp.setContent(vbox);
+			srp.setPrefHeight(300);
+			srp.setPrefWidth(380);
+			srp.getStylesheets().add(getClass().getResource("/CSS/TaskManagementForManager.css").toExternalForm());
+			vbox.setSpacing(5);
+			vbox.setPadding(new Insets(4));
+			
+			PopOver popOver = new PopOver(srp);
+			popOver.setTitle("Notification:");
+			popOver.setArrowLocation(ArrowLocation.TOP_LEFT);
+			popOver.setHeaderAlwaysVisible(true);
+			popOver.show(lbNumberMess);
+
+		});
+	}
+		
+	private void intervalCheckMess() {
+		
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+		
+		Runnable task = new Runnable() {
+            public void run() {
+            	getMessageData();
+            }
+        };
+        
+        
+        int initialDelay = 0; // delay in seconds
+        int period = 5; // period in seconds
+        
+        scheduler.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
+        
+		
+		
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            scheduler.shutdown();
+            try {
+                if (!scheduler.awaitTermination(10, TimeUnit.SECONDS)) {
+                    scheduler.shutdownNow();
+                }
+            } catch (InterruptedException ex) {
+                scheduler.shutdownNow();
+            }
+        }));
+		
+		
+	}
+	private void getMessageData() {
+    	DAPTaskPerform dap = new DAPTaskPerform();
+		ResultSet rs = dap.selectAllRequest(Main.userLogin.getId());
+		int rowCount =0;
+		System.out.println("Luồng vẫn đang chạy");
+		try {
+			while(rs.next()) {
+				rowCount++;				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+		if(rowCount != rsCount) {
+			ResultSet rss = dap.selectAllRequest(Main.userLogin.getId());
+			messList.clear();
+			rsCount=0;
+			messUnChecked =0;
+			try {
+				while(rss.next()) {
+					RequestItem rqItem = new RequestItem(rss.getInt("ID"), rss.getInt("From"), rss.getString("Request"), 
+							rss.getDate("Timestamp"), rss.getInt("Seem"), rss.getString("Title"), rss.getString("First_Name")+" "+
+							rss.getString("Last_Name"), rss.getInt("TaskID"));
+					messList.add(rqItem);
+					if(rqItem.getSeem()==0 ) {messUnChecked++;}
+					rsCount++;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+	            try {
+	                if (rss != null) rss.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+			Platform.runLater(() -> lbNumberMess.setText(String.valueOf(messUnChecked)));
+		}
+		dap.close();
+	}
 }

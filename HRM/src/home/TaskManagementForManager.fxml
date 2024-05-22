@@ -37,11 +37,20 @@
          <children>
             <HBox fx:id="hboxAvatarUser" prefHeight="50.0" prefWidth="220.0">
                <children>
-                  <ImageView fx:id="imageUserName" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../asset/BossAvatar01.png" />
-                     </image>
-                  </ImageView>
+                  <AnchorPane prefHeight="50.0" prefWidth="60.0">
+                     <children>
+                        <ImageView fx:id="imageUserName" fitHeight="50.0" fitWidth="50.0" layoutX="18.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../asset/BossAvatar01.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lbNumberMess" alignment="CENTER" layoutX="36.0" layoutY="4.0" prefHeight="20.0" prefWidth="20.0" text="2" textFill="WHITE" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                   <VBox prefHeight="60.0" prefWidth="170.0">
                      <children>
                         <Label fx:id="lbUsername" text="lbUserName">

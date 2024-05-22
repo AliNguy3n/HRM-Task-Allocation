@@ -95,6 +95,9 @@ public class LoginController implements Initializable{
 							stage.getIcons().add(new Image(getClass().getResourceAsStream("/asset/LogoIconTitle.png")));
 							stage.setTitle("HRM & Task Allocation Appliction");
 							stage.show();
+							stage.setOnCloseRequest(ev -> {
+			    	            System.exit(0);
+			    	        });
 							newStage.close();
 						} catch (IOException e1) {
 
@@ -102,9 +105,13 @@ public class LoginController implements Initializable{
 						}
 					});
 					borderPaneLoginMain.getScene().getWindow().hide();
+	    			newStage.setOnCloseRequest(e -> {
+	    	            System.exit(0);
+	    	        });
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+
     		}
     	}
     	else if(event.getSource() ==btnForgot) {

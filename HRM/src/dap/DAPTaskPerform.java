@@ -143,6 +143,27 @@ public class DAPTaskPerform extends DAPCore {
 		return null;
 	}
 	
+	public ResultSet selectAllRequest(int staffIDTo) {
+		String query ="SELECT TaskRequest.[ID], TaskRequest.[From], TaskRequest.[Request],\r\n"
+				+ "TaskRequest.[Timestamp], TaskRequest.[Seem], Task.[Title],\r\n"
+				+ "Staff.[First_Name], Staff.[Last_Name], Task.[ID] As [TaskID]"
+				+ "FROM TaskRequest\r\n"
+				+ "INNER JOIN Task ON Task.ID = TaskRequest.TaskID\r\n"
+				+ "INNER JOIN Staff ON Staff.ID =TaskRequest.[From]\r\n"
+				+ "WHERE TaskRequest.[To] = ? \r\n"
+				+ "ORDER BY TaskRequest.[Timestamp] DESC";
+		cnn = DBConnect.makeConnection(serverName, port, database, usernameServer, passwordServer);
+		try {
+			st= cnn.prepareStatement(query);
+
+			st.setInt(1, staffIDTo);
+			rs = st.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	/**
 	 * @selectDataForChart Phương thức này được sử dụng để nạp dữ liệu đầu vào cho Biểu đồ Donut trong TaskManagement

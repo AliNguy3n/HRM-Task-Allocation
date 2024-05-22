@@ -31,7 +31,7 @@
 #homePaneCenter{
 	-fx-background-color: transparent;
 }
-#homePaneCenter .view-port{
+#homePaneCenter .viewport{
 	-fx-border-color: transparent;
 }
     
@@ -146,4 +146,36 @@
     
 #vBoxTasksAssigned{
 	
+}
+
+.scroll-pane {
+	-fx-background-color: transparent;
+	-fx-border-width: 0;	
+}
+
+.scroll-pane .viewport{
+	-fx-background-color: transparent;
+	-fx-border-width: 0;	
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #E0E0E0;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 1px;
+    -fx-pref-width: 15px;
+}
+
+
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 1px;
+    -fx-pref-width: 15px;
+}
+
+#lbNumberMess{
+	-fx-background-color: linear-gradient(to bottom, #ff512f, #dd2476);
+	-fx-background-radius: 50%;
 }
