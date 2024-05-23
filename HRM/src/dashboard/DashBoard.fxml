@@ -27,12 +27,12 @@
                </image>
             </ImageView>
          </HBox>
-         <ToggleButton fx:id="btnHome" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Home">
+         <ToggleButton fx:id="btnHome" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Task Management">
             <font>
                <Font name="Roboto Bold" size="16.0" />
             </font>
             <graphic>
-               <FontIcon fx:id="iKonHome" iconLiteral="fltfal-home-20" iconSize="24" />
+               <FontIcon fx:id="iKonHome" iconLiteral="fltfmz-tasks-app-20" iconSize="24" />
             </graphic>
             <toggleGroup>
                <ToggleGroup fx:id="NavBar" />

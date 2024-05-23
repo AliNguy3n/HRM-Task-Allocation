@@ -103,7 +103,7 @@
                         <Image url="@../asset/UserAvatar01.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lbNumberMess" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="36.0" layoutY="-1.0" maxHeight="18.0" prefHeight="20.0" prefWidth="20.0" text="2" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                  <Label fx:id="lbNumberMess" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="36.0" layoutY="-1.0" maxHeight="18.0" prefHeight="20.0" prefWidth="20.0" text="0" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
