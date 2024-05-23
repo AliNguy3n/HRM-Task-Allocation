@@ -46,6 +46,14 @@
                <FontIcon fx:id="iKonManage" iconLiteral="fltfal-data-pie-20" iconSize="24" />
             </graphic>
          </ToggleButton>
+         <ToggleButton fx:id="btnSettings" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Settings" toggleGroup="$NavBar">
+            <font>
+               <Font name="Roboto Bold" size="16.0" />
+            </font>
+            <graphic>
+               <FontIcon fx:id="iKonSettings" iconLiteral="fltfmz-settings-20" iconSize="24" />
+            </graphic>
+         </ToggleButton>
          <ToggleButton fx:id="btnAccount" alignment="CENTER_LEFT" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Account" toggleGroup="$NavBar">>
             <toggleGroup>
                <ToggleGroup fx:id="NavBar1" />
@@ -55,14 +63,6 @@
             </font>
             <graphic>
                <FontIcon fx:id="iKonbtnAccounts1" iconLiteral="fltfmz-person-20" iconSize="24" />
-            </graphic>
-         </ToggleButton>
-         <ToggleButton fx:id="btnSettings" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="Settings" toggleGroup="$NavBar">
-            <font>
-               <Font name="Roboto Bold" size="16.0" />
-            </font>
-            <graphic>
-               <FontIcon fx:id="iKonSettings" iconLiteral="fltfmz-settings-20" iconSize="24" />
             </graphic>
          </ToggleButton>
          <ToggleButton fx:id="btnStaffList" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#handleDashBoardNav" prefHeight="34.0" prefWidth="200.0" text="StaffList" toggleGroup="$NavBar" visible="false">

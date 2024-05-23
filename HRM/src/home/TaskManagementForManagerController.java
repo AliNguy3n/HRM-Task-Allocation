@@ -9,11 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
 
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
@@ -21,12 +19,13 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import application.Main;
 import dap.DAPTaskPerform;
+import dashboard.DashBoardController;
 import dap.DAPTask;
 
 import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.chart.ChartData;
-import javafx.application.Platform;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -247,7 +246,7 @@ public class TaskManagementForManagerController implements Initializable{
     ObservableList<TaskItem> taskList = FXCollections.observableArrayList();
     ObservableList<StaffItem> staffList = FXCollections.observableArrayList();
     ObservableList<RequestItem> requestList = FXCollections.observableArrayList();
-    ArrayList<RequestItem> messList = new ArrayList<RequestItem>();
+
     private Tile donutChartTile;
     int totalTasks = 0;
     int tasksComplete = 0;
@@ -255,8 +254,7 @@ public class TaskManagementForManagerController implements Initializable{
     int tasksDelay = 0;
     TaskItem tit = null;
     
-	int rsCount=0;
-	int messUnChecked = 0;
+
 	
     @FXML
     void handleManagementTask(ActionEvent event) {
@@ -275,7 +273,6 @@ public class TaskManagementForManagerController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		
 		homeVboxItems.setVisible(false);
 		lbUsername.setText(Main.userLogin.getFirstname()+" "+ Main.userLogin.getLastname());
 		lbPoisition.setText(Main.userLogin.getPosition());
@@ -291,7 +288,7 @@ public class TaskManagementForManagerController implements Initializable{
 		setRequestInterface();
 		setDonutChartInterface();
 		
-		intervalCheckMess();
+		lbNumberMess.textProperty().bind((DashBoardController.messUnChecked).asString());
 		checkMessage();
 		lbNumberMess.setVisible(!Boolean.valueOf(Main.obSettings.getValue("notification")));
 		//new SmoothScroll(homePaneCenter, 0.01);
@@ -718,7 +715,7 @@ public class TaskManagementForManagerController implements Initializable{
 		lbNumberMess.setOnMouseClicked(e ->{
 			VBox vbox = new VBox();	
 			
-			for (RequestItem item : messList) {
+			for (RequestItem item : DashBoardController.messList) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/MessageItem.fxml"));
 				
 				try {
@@ -748,81 +745,5 @@ public class TaskManagementForManagerController implements Initializable{
 		});
 	}
 		
-	private void intervalCheckMess() {
-		
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		
-		Runnable task = new Runnable() {
-            public void run() {
-            	getMessageData();
-            }
-        };
-        
-        
-        int initialDelay = 0; // delay in seconds
-        int period = 5; // period in seconds
-        
-        scheduler.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
-        
-		
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            scheduler.shutdown();
-            try {
-                if (!scheduler.awaitTermination(10, TimeUnit.SECONDS)) {
-                    scheduler.shutdownNow();
-                }
-            } catch (InterruptedException ex) {
-                scheduler.shutdownNow();
-            }
-        }));
-		
-		
-	}
-	private void getMessageData() {
-    	DAPTaskPerform dap = new DAPTaskPerform();
-		ResultSet rs = dap.selectAllRequest(Main.userLogin.getId());
-		int rowCount =0;
-		System.out.println("Luồng vẫn đang chạy");
-		try {
-			while(rs.next()) {
-				rowCount++;				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-	        try {
-	            if (rs != null) rs.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-
-		if(rowCount != rsCount) {
-			ResultSet rss = dap.selectAllRequest(Main.userLogin.getId());
-			messList.clear();
-			rsCount=0;
-			messUnChecked =0;
-			try {
-				while(rss.next()) {
-					RequestItem rqItem = new RequestItem(rss.getInt("ID"), rss.getInt("From"), rss.getString("Request"), 
-							rss.getDate("Timestamp"), rss.getInt("Seem"), rss.getString("Title"), rss.getString("First_Name")+" "+
-							rss.getString("Last_Name"), rss.getInt("TaskID"));
-					messList.add(rqItem);
-					if(rqItem.getSeem()==0 ) {messUnChecked++;}
-					rsCount++;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-	            try {
-	                if (rss != null) rss.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-			Platform.runLater(() -> lbNumberMess.setText(String.valueOf(messUnChecked)));
-		}
-		dap.close();
-	}
+	
 }

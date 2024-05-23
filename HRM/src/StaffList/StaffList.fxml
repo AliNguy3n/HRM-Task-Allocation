@@ -20,7 +20,6 @@
             <!-- Thông tin tiêu đề bảng -->
             <Label styleClass="table-title" text="Staff List" />
 
-                        <!-- Thêm HBox cho tìm kiếm và lọc -->
             <HBox alignment="CENTER_RIGHT" spacing="10">
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -59,7 +58,7 @@
                         <!-- TableView -->
             <TableView fx:id="staffTable" styleClass="table-view" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="avatarCol" prefWidth="75.0" />
+<!--                    <TableColumn fx:id="avatarCol" prefWidth="75.0" />-->
                     <TableColumn fx:id="fullNameCol" prefWidth="150.0" styleClass="center-text" text="Full Name" />
                     <TableColumn fx:id="staffIdCol" prefWidth="100.0" styleClass="center-text" text="Staff ID" />
                     <TableColumn fx:id="phoneNumberCol" prefWidth="125.0" styleClass="center-text" text="Phone Number" />

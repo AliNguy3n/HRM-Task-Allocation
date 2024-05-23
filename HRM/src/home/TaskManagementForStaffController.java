@@ -37,6 +37,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import application.Main;
 import dap.DAPTask;
 import dap.DAPTaskPerform;
+import dashboard.DashBoardController;
 import eu.hansolo.tilesfx.Tile;
 
 import eu.hansolo.tilesfx.TileBuilder;
@@ -250,7 +251,7 @@ public class TaskManagementForStaffController implements Initializable{
     private String[] date = {"7 days","14 days", "21 day", "30 days", "60 days"};
     private  ObservableList<TaskItem> taskProgressList = FXCollections.observableArrayList();
     private ObservableList<TaskItem> taskCompletedList = FXCollections.observableArrayList();
-    ArrayList<RequestItem> messList = new ArrayList<RequestItem>();
+
     
     int totalTask ;
     int delayTask ;
@@ -267,8 +268,7 @@ public class TaskManagementForStaffController implements Initializable{
 	
 	StaffItem staffItem;
 	int mode = 0;
-	int rsCount=0;
-	int messUnChecked = 0;
+
 
 	
 	@Override
@@ -288,12 +288,12 @@ public class TaskManagementForStaffController implements Initializable{
 			chartValueTotal.put(Date.valueOf(localDate.plusDays(i)), 0);
 			chartValueComplete.put(Date.valueOf(localDate.plusDays(i)), 0);
 		}
-		intervalCheckMess();
-		checkMessage();
+
 		setTaskInterface();
 		btnBackToTasks.setDisable(true);
 		btnBackToTasks.setVisible(false);
-		
+		lbNumberMess.textProperty().bind((DashBoardController.messUnChecked).asString());
+		checkMessage();
 		
 	}
 	
@@ -587,14 +587,12 @@ public class TaskManagementForStaffController implements Initializable{
        
 	}
 	
-	
-	
 	private void checkMessage() {
-		
+	
 		lbNumberMess.setOnMouseClicked(e ->{
 			VBox vbox = new VBox();	
 			
-			for (RequestItem item : messList) {
+			for (RequestItem item : DashBoardController.messList) {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/MessageItem.fxml"));
 				
 				try {
@@ -622,83 +620,6 @@ public class TaskManagementForStaffController implements Initializable{
 			popOver.show(lbNumberMess);
 
 		});
-	}
-		
-	private void intervalCheckMess() {
-		
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		
-		Runnable task = new Runnable() {
-            public void run() {
-            	getMessageData();
-            }
-        };
-        
-        
-        int initialDelay = 0; // delay in seconds
-        int period = 5; // period in seconds
-        
-        scheduler.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
-        
-		
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            scheduler.shutdown();
-            try {
-                if (!scheduler.awaitTermination(10, TimeUnit.SECONDS)) {
-                    scheduler.shutdownNow();
-                }
-            } catch (InterruptedException ex) {
-                scheduler.shutdownNow();
-            }
-        }));
-		
-		
-	}
-	private void getMessageData() {
-    	DAPTaskPerform dap = new DAPTaskPerform();
-		ResultSet rs = dap.selectAllRequest(Main.userLogin.getId());
-		int rowCount =0;
-		System.out.println("Luồng vẫn đang chạy");
-		try {
-			while(rs.next()) {
-				rowCount++;				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-	        try {
-	            if (rs != null) rs.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-
-		if(rowCount != rsCount) {
-			ResultSet rss = dap.selectAllRequest(Main.userLogin.getId());
-			messList.clear();
-			rsCount=0;
-			messUnChecked =0;
-			try {
-				while(rss.next()) {
-					RequestItem rqItem = new RequestItem(rss.getInt("ID"), rss.getInt("From"), rss.getString("Request"), 
-							rss.getDate("Timestamp"), rss.getInt("Seem"), rss.getString("Title"), rss.getString("First_Name")+" "+
-							rss.getString("Last_Name"), rss.getInt("TaskID"));
-					messList.add(rqItem);
-					if(rqItem.getSeem()==0 ) {messUnChecked++;}
-					rsCount++;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-	            try {
-	                if (rss != null) rss.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-			Platform.runLater(() -> lbNumberMess.setText(String.valueOf(messUnChecked)));
-		}
-		dap.close();
-	}
+	}	
+	
 }

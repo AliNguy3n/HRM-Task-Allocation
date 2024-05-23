@@ -25,8 +25,13 @@ public class FIOCore {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(":");
-                map.put(parts[0], parts[1]);
+            	if(line.length()>1) {
+            		String[] parts = line.split(":");
+                    map.put(parts[0], parts[1]);
+            	}else {
+            		map.put("username", "Null");
+            	}
+                
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -3,45 +3,49 @@ package Models.DTO;
 import java.sql.Date;
 
 public class StaffTaskDTO {
-    private Long id;
+    private long id;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String department;
     private String position;
     private String avatarPath;
     private String taskTitle;
     private Date taskStartedDate;
     private Date taskEndedDate;
-    private Integer AssignedBy;
-    private Float Mark;
-    private String fullName;
+    private int assignedBy;
+    private float mark;
+    private float averageMark;
+    private float monthlyMark;
+    private float totalMark;
 
-    public StaffTaskDTO(Long id, String firstName, String lastName, String department, String position, String avatarPath, String taskTitle, Date taskStartedDate, Date taskEndedDate, Integer assignedBy, Float mark) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.department = department;
-        this.position = position;
-        this.avatarPath = avatarPath;
-        this.taskTitle = taskTitle;
-        this.taskStartedDate = taskStartedDate;
-        this.taskEndedDate = taskEndedDate;
-        AssignedBy = assignedBy;
-        Mark = mark;
+    public float getTotalMark() {
+        return totalMark;
     }
 
-    public StaffTaskDTO() {}
+    public void setTotalMark(float totalMark) {
+        this.totalMark = totalMark;
+    }
 
-    public Long getId() {
+    // Getters and setters
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public float getMonthlyMark() {
+        return monthlyMark;
+    }
+
+    public void setMonthlyMark(float monthlyMark) {
+        this.monthlyMark = monthlyMark;
     }
 
     public void setFirstName(String firstName) {
@@ -54,6 +58,14 @@ public class StaffTaskDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getDepartment() {
@@ -104,27 +116,27 @@ public class StaffTaskDTO {
         this.taskEndedDate = taskEndedDate;
     }
 
-    public Integer getAssignedBy() {
-        return AssignedBy;
+    public int getAssignedBy() {
+        return assignedBy;
     }
 
-    public void setAssignedBy(Integer assignedBy) {
-        AssignedBy = assignedBy;
+    public void setAssignedBy(int assignedBy) {
+        this.assignedBy = assignedBy;
     }
 
-    public Float getMark() {
-        return Mark;
+    public float getMark() {
+        return mark;
     }
 
-    public void setMark(Float mark) {
-        Mark = mark;
+    public void setMark(float mark) {
+        this.mark = mark;
     }
 
-    public String getFullName() {
-        return fullName;
+    public float getAverageMark() {
+        return averageMark;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setAverageMark(float averageMark) {
+        this.averageMark = averageMark;
     }
 }
