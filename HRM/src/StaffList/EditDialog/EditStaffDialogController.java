@@ -2,6 +2,7 @@ package StaffList.EditDialog;
 
 import Models.DTO.StaffDTO;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.regex.Pattern;
 
 public class EditStaffDialogController {
     @FXML
@@ -40,9 +42,11 @@ public class EditStaffDialogController {
     @FXML
     public void initialize() {
         okButton.setOnAction(event -> {
-            updateStaffData();
-            confirmed = true;
-            closeWindow();
+            if (validateInput()) {
+                updateStaffData();
+                confirmed = true;
+                closeWindow();
+            }
         });
 
         cancelButton.setOnAction(event -> closeWindow());
@@ -57,7 +61,6 @@ public class EditStaffDialogController {
         emailField.setText(staff.getEmail());
         departmentComboBox.setValue(staff.getDepartment());
         positionComboBox.setValue(staff.getPosition());
-        System.out.println(staff.getAvatarPath());
     }
 
     private void updateStaffData() {
@@ -93,11 +96,53 @@ public class EditStaffDialogController {
                 }
 
                 Files.copy(file.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println(dest.toString());
                 staff.setAvatarPath(dest.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private boolean validateInput() {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String phoneNumber = phoneNumberField.getText();
+        String email = emailField.getText();
+
+        if (!firstName.matches("[a-zA-Z]+")) {
+            showAlert("Invalid First Name", "First name must not contain numbers or special characters.");
+            return false;
+        }
+
+        if (!lastName.matches("[a-zA-Z]+")) {
+            showAlert("Invalid Last Name", "Last name must not contain numbers or special characters.");
+            return false;
+        }
+
+        if (!phoneNumber.matches("^0[1-9][0-9]{8}$")) {
+            showAlert("Invalid Phone Number", "Phone number must be 10 digits long, start with 0, and the second digit must not be 0.");
+            return false;
+        }
+
+        if (!isValidEmail(email)) {
+            showAlert("Invalid Email", "Email must have a valid format (e.g., user@example.com).");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return pat.matcher(email).matches();
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

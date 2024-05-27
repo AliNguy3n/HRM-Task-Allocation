@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="408.0" prefWidth="400" stylesheets="@EditStaffDialog.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StaffList.EditDialog.EditStaffDialogController">
     <children>
@@ -16,7 +17,7 @@
         <Label layoutX="43.0" layoutY="87.0" text="Last Name" />
         <TextField fx:id="lastNameField" layoutX="134.0" layoutY="83.0" prefHeight="25.0" prefWidth="200.0" />
 
-        <Label layoutX="43.0" layoutY="127.0" text="Phone Num" />
+        <Label layoutX="43.0" layoutY="127.0" text="Phone Number" />
         <TextField fx:id="phoneNumberField" layoutX="134.0" layoutY="123.0" prefHeight="25.0" prefWidth="200.0" />
 
         <Label layoutX="43.0" layoutY="167.0" text="Email" />
@@ -56,5 +57,6 @@
 
         <Button fx:id="okButton" layoutX="192.0" layoutY="338.0" text="OK" />
         <Button fx:id="cancelButton" layoutX="257.0" layoutY="338.0" text="Cancel" />
+      <Text fill="RED" layoutX="47.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Fields are required" />
     </children>
 </AnchorPane>

@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import user.UserLogin;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +20,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class EditDialogController implements Initializable {
 
@@ -70,27 +70,81 @@ public class EditDialogController implements Initializable {
 
     @FXML
     private void handleOk() {
-        user.setFirstname(firstNameField.getText());
-        user.setLastname(lastNameField.getText());
-        user.setPhonenumber(phoneNumberField.getText());
-        user.setEmail(emailField.getText());
+        if (validateInput()) {
+            user.setFirstname(firstNameField.getText());
+            user.setLastname(lastNameField.getText());
+            user.setPhonenumber(phoneNumberField.getText());
+            user.setEmail(emailField.getText());
 
-        if (newAvatarPath != null && !newAvatarPath.isEmpty()) {
-            user.setAvatarPath(newAvatarPath);
+            if (newAvatarPath != null && !newAvatarPath.isEmpty()) {
+                user.setAvatarPath(newAvatarPath);
+            }
+
+            saveUserData(user);
+
+            okClicked = true;
+
+            // Hiển thị thông báo cập nhật thành công
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Update Successful");
+            alert.setHeaderText(null);
+            alert.setContentText("User information updated successfully!");
+            alert.showAndWait();
+
+            dialogStage.close(); // Đóng hộp thoại sau khi lưu và hiển thị thông báo
+        }
+    }
+
+    private boolean validateInput() {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String phoneNumber = phoneNumberField.getText();
+        String email = emailField.getText();
+
+        if (isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(phoneNumber) || isNullOrEmpty(email)) {
+            showAlert("Validation Error", "All fields must not be empty.");
+            return false;
         }
 
-        saveUserData(user);
+        if (!firstName.matches("[a-zA-Z]+")) {
+            showAlert("Validation Error", "First name must not contain numbers or special characters.");
+            return false;
+        }
 
-        okClicked = true;
+        if (!lastName.matches("[a-zA-Z]+")) {
+            showAlert("Validation Error", "Last name must not contain numbers or special characters.");
+            return false;
+        }
 
-        // Hiển thị thông báo cập nhật thành công
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Update Successful");
+        if (!phoneNumber.matches("^0[1-9][0-9]{8}$")) {
+            showAlert("Validation Error", "Phone number must be 10 digits long, start with 0, and the second digit must not be 0.");
+            return false;
+        }
+
+        if (!isValidEmail(email)) {
+            showAlert("Validation Error", "Email must be in correct format (e.g., user@example.com).");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return pat.matcher(email).matches();
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText("User information updated successfully!");
+        alert.setContentText(message);
         alert.showAndWait();
-
-        dialogStage.close(); // Đóng hộp thoại sau khi lưu và hiển thị thông báo
     }
 
     @FXML

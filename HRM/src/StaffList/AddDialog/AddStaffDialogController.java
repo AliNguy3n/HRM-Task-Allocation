@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class AddStaffDialogController implements Initializable {
     @FXML
@@ -28,7 +29,7 @@ public class AddStaffDialogController implements Initializable {
     private Button okButton, cancelButton, addImage;
 
     private StaffDTO staff;
-    private StaffListDAO staffListDAO;  // Thêm DAO để kiểm tra username
+    private StaffListDAO staffListDAO;
 
     private boolean confirmed = false;
 
@@ -46,36 +47,77 @@ public class AddStaffDialogController implements Initializable {
         salaryField.setText(staff.getSalary() != null ? staff.getSalary().toString() : "0.0");
     }
 
-    // Thêm phương thức để thiết lập DAO
     public void setStaffListDAO(StaffListDAO staffListDAO) {
         this.staffListDAO = staffListDAO;
     }
 
     private boolean validateInput() {
-        if (firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || phoneNumberField.getText().isEmpty() ||
-                emailField.getText().isEmpty() || departmentComboBox.getValue() == null || positionComboBox.getValue() == null ||
-                usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || confirmPasswordField.getText().isEmpty() ||
-                salaryField.getText().isEmpty()) {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String phoneNumber = phoneNumberField.getText();
+        String email = emailField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+        String salary = salaryField.getText();
+        String department = departmentComboBox.getValue();
+        String position = positionComboBox.getValue();
+
+        if (isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(phoneNumber) || isNullOrEmpty(email) ||
+                isNullOrEmpty(department) || isNullOrEmpty(position) || isNullOrEmpty(username) ||
+                isNullOrEmpty(password) || isNullOrEmpty(confirmPassword) || isNullOrEmpty(salary)) {
             showAlert("Validation Error", "All fields must not be empty.");
             return false;
         }
-        if (!phoneNumberField.getText().matches("\\d{10}")) {
-            showAlert("Validation Error", "Phone number must be 10 digits.");
+
+        if (!firstName.matches("[a-zA-Z]+")) {
+            showAlert("Validation Error", "First name must not contain numbers or special characters.");
             return false;
         }
-        if (!emailField.getText().contains("@")) {
-            showAlert("Validation Error", "Email must be in correct format.");
+
+        if (!lastName.matches("[a-zA-Z]+")) {
+            showAlert("Validation Error", "Last name must not contain numbers or special characters.");
             return false;
         }
-        if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+
+        if (!phoneNumber.matches("^0[1-9][0-9]{8}$")) {
+            showAlert("Validation Error", "Phone number must be 10 digits long, start with 0, and the second digit must not be 0.");
+            return false;
+        }
+
+        if (!isValidEmail(email)) {
+            showAlert("Validation Error", "Email must be in correct format (e.g., user@example.com).");
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
             showAlert("Validation Error", "Passwords do not match.");
             return false;
         }
-        if (staffListDAO.isUsernameExist(usernameField.getText())) {
+
+        if (staffListDAO.isUsernameExist(username)) {
             showAlert("Validation Error", "Username already exists.");
             return false;
         }
+
+        try {
+            Float.parseFloat(salary);
+        } catch (NumberFormatException e) {
+            showAlert("Validation Error", "Salary must be a valid number.");
+            return false;
+        }
+
         return true;
+    }
+
+    private boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return pat.matcher(email).matches();
     }
 
     private void showAlert(String title, String message) {
@@ -88,7 +130,7 @@ public class AddStaffDialogController implements Initializable {
 
     private void updateStaffData() {
         staff.setFirstName(firstNameField.getText());
-        staff.setLastName(lastNameField.getText());
+        staff.setLastName(firstNameField.getText());
         staff.setPhoneNumber(phoneNumberField.getText());
         staff.setEmail(emailField.getText());
         staff.setDepartment(departmentComboBox.getValue());

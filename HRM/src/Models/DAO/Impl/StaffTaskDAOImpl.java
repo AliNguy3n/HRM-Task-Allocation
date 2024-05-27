@@ -22,7 +22,7 @@ public class StaffTaskDAOImpl implements StaffTaskDAO {
         List<StaffTaskDTO> staffTasks = new ArrayList<>();
 
         try {
-            String query = "SELECT s.id, s.avatar, s.first_name, s.last_name, s.department, s.position, " +
+            String query = "SELECT DISTINCT s.id, s.avatar, s.first_name, s.last_name, s.department, s.position, " +
                     "t.title, t.started_date, t.ended_date, t.assignedby, e.mark " +
                     "FROM staff s " +
                     "JOIN evaluation e ON s.id = e.staffid " +
@@ -51,6 +51,7 @@ public class StaffTaskDAOImpl implements StaffTaskDAO {
         }
         return staffTasks;
     }
+
 
     @Override
     public List<StaffTaskDTO> getStaffTasksById(int id) {
@@ -94,7 +95,7 @@ public class StaffTaskDAOImpl implements StaffTaskDAO {
         List<StaffTaskDTO> staffTasks = new ArrayList<>();
 
         try {
-            String query = "SELECT s.id, s.avatar, s.first_name, s.last_name, s.department, s.position, " +
+            String query = "SELECT DISTINCT s.id, s.avatar, s.first_name, s.last_name, s.department, s.position, " +
                     "t.title, t.started_date, t.ended_date, t.assignedby, e.mark " +
                     "FROM staff s " +
                     "JOIN evaluation e ON s.id = e.staffid " +
@@ -125,4 +126,5 @@ public class StaffTaskDAOImpl implements StaffTaskDAO {
         }
         return staffTasks;
     }
+
 }
