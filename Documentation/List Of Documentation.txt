@@ -1,7 +1,0 @@
-01. Project Docs
-	- Design Document
-	- Supplementary Document
-	- Installation Guide
-	- User Guide
-	- Presentation
-02. Video
